@@ -14,11 +14,11 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <Header onPageChange={onPageChange} />
       {
         {
-          LOGIN: <Login />,
+          LOGIN: <Login onPageChange={onPageChange} />,
           MAP: <Map />,
           PROFILE: <Profile />,
         }[page]
