@@ -4,9 +4,10 @@ import Header from "./Header";
 import Login from "./Login";
 import Map from "./Map";
 import Profile from "./Profile";
+import Registration from "./Registration";
 
 function App() {
-  const [page, setPage] = useState("LOGIN");
+  const [page, setPage] = useState("REGISTRATION");
   const onPageChange = (e) => {
     e.preventDefault();
 
@@ -19,6 +20,7 @@ function App() {
       {
         {
           LOGIN: <Login onPageChange={onPageChange} />,
+          REGISTRATION: <Registration onPageChange={onPageChange} />,
           MAP: <Map />,
           PROFILE: <Profile />,
         }[page]

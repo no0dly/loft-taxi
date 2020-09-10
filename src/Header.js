@@ -25,7 +25,11 @@ function Header({ onPageChange }) {
               </button>
             </li>
             <li className="nav__item">
-              <button className="nav__link" name="LOGIN" onClick={onPageChange}>
+              <button
+                className="nav__link"
+                name="REGISTRATION"
+                onClick={onPageChange}
+              >
                 Войти
               </button>
             </li>

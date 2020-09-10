@@ -1,11 +1,11 @@
-.login {
+.registration {
   background-image: url("./background.png");
   background-color: #2d2d2d;
   background-size: cover;
   height: calc(100% - 96.6px);
 }
 
-.login__form {
+.registration__form {
   width: 500px;
   padding: 50px 50px 65px;
   background: #fff;
@@ -28,5 +28,24 @@
 }
 
 .field--full {
+  width: 100%;
+}
+
+.field--half {
+  width: 50%;
+}
+
+.field__label {
+  display: block;
+}
+
+.field__input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
   width: 100%;
 }
