@@ -9,7 +9,7 @@ function Registration({ onPageChange }) {
     password: "",
   });
 
-  const onChangeHandler = (e) => {
+  const onChange = (e) => {
     setFormField({
       ...formFields,
       [e.target.name]: e.target.value,
@@ -44,7 +44,7 @@ function Registration({ onPageChange }) {
                 className="field__input"
                 name="email"
                 value={formFields.email}
-                onChange={onChangeHandler}
+                onChange={onChange}
               />
             </div>
             <div className="field field--half">
@@ -57,7 +57,7 @@ function Registration({ onPageChange }) {
                 className="field__input"
                 name="name"
                 value={formFields.name}
-                onChange={onChangeHandler}
+                onChange={onChange}
               />
             </div>
             <div className="field field--half">
@@ -70,7 +70,7 @@ function Registration({ onPageChange }) {
                 className="field__input"
                 name="lastName"
                 value={formFields.lastName}
-                onChange={onChangeHandler}
+                onChange={onChange}
               />
             </div>
             <div className="field field--full">
@@ -83,7 +83,7 @@ function Registration({ onPageChange }) {
                 className="field__input"
                 name="password"
                 value={formFields.password}
-                onChange={onChangeHandler}
+                onChange={onChange}
               />
             </div>
             <div className="actions">

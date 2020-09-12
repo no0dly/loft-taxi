@@ -7,7 +7,7 @@ function Login({ onPageChange }) {
     password: "",
   });
 
-  const onChangeHandler = (e) => {
+  const onChange = (e) => {
     setFormField({
       ...formFields,
       [e.target.name]: e.target.value,
@@ -42,7 +42,7 @@ function Login({ onPageChange }) {
                 className="field__input"
                 name="name"
                 value={formFields.name}
-                onChange={onChangeHandler}
+                onChange={onChange}
               />
             </div>
             <div className="field field--full">
@@ -55,7 +55,7 @@ function Login({ onPageChange }) {
                 className="field__input"
                 name="password"
                 value={formFields.password}
-                onChange={onChangeHandler}
+                onChange={onChange}
               />
             </div>
             <div className="actions">

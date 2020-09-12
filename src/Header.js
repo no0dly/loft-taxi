@@ -1,6 +1,21 @@
 import React from "react";
 import "./Header.css";
 
+const buttonList = [
+  {
+    name: "MAP",
+    text: "Карта",
+  },
+  {
+    name: "PROFILE",
+    text: "Профиль",
+  },
+  {
+    name: "REGISTRATION",
+    text: "Войти",
+  },
+];
+
 function Header({ onPageChange }) {
   return (
     <header className="header">
@@ -10,29 +25,17 @@ function Header({ onPageChange }) {
         </div>
         <nav className="nav">
           <ul className="nav__list">
-            <li className="nav__item">
-              <button className="nav__link" name="MAP" onClick={onPageChange}>
-                Карта
-              </button>
-            </li>
-            <li className="nav__item">
-              <button
-                className="nav__link"
-                name="PROFILE"
-                onClick={onPageChange}
-              >
-                Профиль
-              </button>
-            </li>
-            <li className="nav__item">
-              <button
-                className="nav__link"
-                name="REGISTRATION"
-                onClick={onPageChange}
-              >
-                Войти
-              </button>
-            </li>
+            {buttonList.map(({ name, text }) => (
+              <li className="nav__item" key={name}>
+                <button
+                  className="nav__link"
+                  name={name}
+                  onClick={onPageChange}
+                >
+                  {text}
+                </button>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
