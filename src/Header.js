@@ -1,4 +1,5 @@
 import React from "react";
+import { Logo } from "loft-taxi-mui-theme";
 import "./Header.css";
 
 const buttonList = [
@@ -21,7 +22,7 @@ function Header({ onPageChange }) {
     <header className="header">
       <div className="container">
         <div className="logo">
-          <span className="logo__text">Logo</span>
+          <Logo />
         </div>
         <nav className="nav">
           <ul className="nav__list">
