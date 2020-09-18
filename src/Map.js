@@ -8,7 +8,6 @@ mapboxgl.accessToken =
 function Map() {
   const mapContainer = useRef(null);
   useEffect(() => {
-    // debugger;
     const myMap = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",

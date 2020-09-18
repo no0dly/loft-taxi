@@ -1,6 +1,12 @@
 import React from "react";
 import { Logo } from "loft-taxi-mui-theme";
 import "./Header.css";
+import { func } from "prop-types";
+import { Button, Container, Paper } from "@material-ui/core";
+
+const proopTypes = {
+  onPageChange: func.isRequired,
+};
 
 const buttonList = [
   {
@@ -19,29 +25,26 @@ const buttonList = [
 
 function Header({ onPageChange }) {
   return (
-    <header className="header">
-      <div className="container">
-        <div className="logo">
-          <Logo />
+    <Paper elevation="4" tag="header">
+      <Container>
+        <div className="flex">
+          <div className="logo">
+            <Logo />
+          </div>
+          <nav className="nav">
+            <ul className="nav__list">
+              {buttonList.map(({ name, text }) => (
+                <li className="nav__item" key={name}>
+                  <Button onClick={() => onPageChange(name)}>{text}</Button>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
-        <nav className="nav">
-          <ul className="nav__list">
-            {buttonList.map(({ name, text }) => (
-              <li className="nav__item" key={name}>
-                <button
-                  className="nav__link"
-                  name={name}
-                  onClick={onPageChange}
-                >
-                  {text}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-    </header>
+      </Container>
+    </Paper>
   );
 }
 
+Header.proopTypes = proopTypes;
 export default Header;

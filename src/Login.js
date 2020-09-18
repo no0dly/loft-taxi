@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import "./Login.css";
+import { func } from "prop-types";
+
+const proopTypes = {
+  onPageChange: func.isRequired,
+};
 
 function Login({ onPageChange }) {
   const [formFields, setFormField] = useState({
@@ -25,7 +30,7 @@ function Login({ onPageChange }) {
             <div>
               <span>
                 Новый пользователь?{" "}
-                <button onClick={onPageChange} name="REGISTRATION">
+                <button onClick={() => onPageChange("REGISTRATION")}>
                   Зарегистрируйтесь
                 </button>
               </span>
@@ -61,8 +66,7 @@ function Login({ onPageChange }) {
             <div className="actions">
               <button
                 className="actions__button"
-                name="MAP"
-                onClick={onPageChange}
+                onClick={() => onPageChange("MAP")}
               >
                 Войти
               </button>
@@ -73,4 +77,7 @@ function Login({ onPageChange }) {
     </div>
   );
 }
+
+Login.proopTypes = proopTypes;
+
 export default Login;

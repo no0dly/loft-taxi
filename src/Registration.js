@@ -1,5 +1,10 @@
 import React, { useState } from "react";
+import { func } from "prop-types";
 import "./Registration.css";
+
+const proopTypes = {
+  onPageChange: func.isRequired,
+};
 
 function Registration({ onPageChange }) {
   const [formFields, setFormField] = useState({
@@ -27,9 +32,7 @@ function Registration({ onPageChange }) {
             <div>
               <span>
                 Уже зарегистрирован?{" "}
-                <button onClick={onPageChange} name="LOGIN">
-                  Войти
-                </button>
+                <button onClick={() => onPageChange("LOGIN")}>Войти</button>
               </span>
             </div>
           </div>
@@ -89,8 +92,7 @@ function Registration({ onPageChange }) {
             <div className="actions">
               <button
                 className="actions__button"
-                name="MAP"
-                onClick={onPageChange}
+                onClick={() => onPageChange("MAP")}
               >
                 Зарегистрироваться
               </button>
@@ -101,4 +103,6 @@ function Registration({ onPageChange }) {
     </div>
   );
 }
+
+Registration.proopTypes = proopTypes;
 export default Registration;

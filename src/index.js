@@ -3,8 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { theme } from "loft-taxi-mui-theme"; // Импортируем саму тему
+import { theme } from "loft-taxi-mui-theme";
 import { MuiThemeProvider } from "@material-ui/core/styles";
+import "reset.css";
 
 ReactDOM.render(
   <React.StrictMode>

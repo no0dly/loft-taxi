@@ -8,15 +8,13 @@ import Registration from "./Registration";
 
 function App() {
   const [page, setPage] = useState("REGISTRATION");
-  const onPageChange = (e) => {
-    e.preventDefault();
-
-    setPage(e.target.name);
+  const onPageChange = (pageName) => {
+    setPage(pageName);
   };
 
   return (
     <div className="app">
-      <Header onPageChange={onPageChange} />
+      {page !== "LOGIN" && <Header onPageChange={onPageChange} />}
       {
         {
           LOGIN: <Login onPageChange={onPageChange} />,
