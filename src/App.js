@@ -14,7 +14,9 @@ function App() {
 
   return (
     <div className="app">
-      {page !== "LOGIN" && <Header onPageChange={onPageChange} />}
+      {page !== "LOGIN" && page !== "REGISTRATION" && (
+        <Header onPageChange={onPageChange} />
+      )}
       {
         {
           LOGIN: <Login onPageChange={onPageChange} />,
