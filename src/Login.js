@@ -1,28 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Login.css";
 import { func } from "prop-types";
+
+import { AuthContext } from "./App";
 
 const proopTypes = {
   onPageChange: func.isRequired,
 };
 
 function Login({ onPageChange }) {
-  const [formFields, setFormField] = useState({
-    name: "",
+  const [fields, setFields] = useState({
+    email: "",
     password: "",
   });
 
+  const auth = useContext(AuthContext);
   const onChange = (e) => {
-    setFormField({
-      ...formFields,
+    setFields({
+      ...fields,
       [e.target.name]: e.target.value,
     });
+  };
+  const login = (e) => {
+    e.preventDefault();
+    auth.login(fields.email, fields.password);
   };
 
   return (
     <div className="login">
       <div className="login__form">
-        <form className="form">
+        <form className="form" onSubmit={login}>
           <div className="title">
             <div>
               <h3>Войти</h3>
@@ -38,15 +45,15 @@ function Login({ onPageChange }) {
           </div>
           <div className="form__container">
             <div className="field field--full">
-              <label htmlFor="name" className="field__label">
+              <label htmlFor="email" className="field__label">
                 Имя
               </label>
               <input
-                id="name"
+                id="email"
                 type="text"
                 className="field__input"
-                name="name"
-                value={formFields.name}
+                name="email"
+                value={fields.email}
                 onChange={onChange}
               />
             </div>
@@ -59,17 +66,12 @@ function Login({ onPageChange }) {
                 type="password"
                 className="field__input"
                 name="password"
-                value={formFields.password}
+                value={fields.password}
                 onChange={onChange}
               />
             </div>
             <div className="actions">
-              <button
-                className="actions__button"
-                onClick={() => onPageChange("MAP")}
-              >
-                Войти
-              </button>
+              <button className="actions__button">Войти</button>
             </div>
           </div>
         </form>

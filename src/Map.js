@@ -16,7 +16,7 @@ function Map() {
     });
     return () => myMap.remove();
   });
-  console.log(mapContainer.current);
+
   return <div className="map-container" ref={mapContainer} />;
 }
 export default Map;
