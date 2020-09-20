@@ -11,7 +11,7 @@ import {
   Button,
 } from "@material-ui/core";
 
-import { AuthContext } from "./App";
+import { AuthContext } from "./AuthContext";
 import "./Login.css";
 
 const proopTypes = {
@@ -87,9 +87,10 @@ function Login({ onPageChange }) {
               <Grid item xs={12}>
                 <div className="form__field">
                   <Button
+                    type="submit"
                     variant="contained"
                     color="primary"
-                    onClick={() => onPageChange("MAP")}
+                    // onClick={() => onPageChange("MAP")}
                   >
                     Войти
                   </Button>

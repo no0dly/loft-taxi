@@ -5,42 +5,23 @@ import Login from "./Login";
 import Map from "./Map";
 import Profile from "./Profile";
 import Registration from "./Registration";
+import AuthProvider from "./AuthContext";
 
 export const AuthContext = React.createContext();
 
 function App() {
   const [page, setPage] = useState("REGISTRATION");
-  const [isLoggedIn, setAuth] = useState(false);
 
   const onPageChange = (pageName) => {
     setPage(pageName);
   };
 
-  const login = (email, password) => {
-    console.log("Login is process", email, password);
-    setAuth(true);
-    console.log("Login is done");
-    setPage("MAP");
-  };
-
-  const logout = () => {
-    console.log("Logout is process");
-    setAuth(false);
-    console.log("Logout is done");
-  };
+  const isLoginPages = page === "LOGIN" || page === "REGISTRATION";
 
   return (
-    <AuthContext.Provider
-      value={{
-        isLoggedIn,
-        login,
-        logout,
-      }}
-    >
+    <AuthProvider changePage={setPage}>
       <div className="app">
-        {page !== "LOGIN" && page !== "REGISTRATION" && (
-          <Header onPageChange={onPageChange} />
-        )}
+        {!isLoginPages && <Header onPageChange={onPageChange} />}
         {
           {
             LOGIN: <Login onPageChange={onPageChange} />,
@@ -50,7 +31,7 @@ function App() {
           }[page]
         }
       </div>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
 
