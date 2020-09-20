@@ -18,7 +18,7 @@ function Map() {
   });
 
   return (
-    <div className="map">
+    <div className="map" data-testid="map">
       <div className="map-container" ref={mapContainer} />;
     </div>
   );

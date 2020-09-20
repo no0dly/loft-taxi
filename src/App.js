@@ -20,7 +20,7 @@ function App() {
 
   return (
     <AuthProvider changePage={setPage}>
-      <div className="app">
+      <div className="app" data-testid="app">
         {!isLoginPages && <Header onPageChange={onPageChange} />}
         {
           {

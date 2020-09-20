@@ -31,7 +31,7 @@ function Registration({ onPageChange }) {
   };
 
   return (
-    <div className="registration">
+    <div className="registration" data-testid="registration">
       <div className="registration__container">
         <div className="registration__logo">
           <Logo white animated />

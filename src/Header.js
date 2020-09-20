@@ -25,7 +25,13 @@ const buttonList = [
 
 function Header({ onPageChange }) {
   return (
-    <Paper elevation={4} tag="header" className="header" square>
+    <Paper
+      elevation={4}
+      tag="header"
+      className="header"
+      square
+      data-testid="header"
+    >
       <Container>
         <div className="flex">
           <div className="logo">

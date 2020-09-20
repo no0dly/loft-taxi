@@ -37,7 +37,7 @@ function Login({ onPageChange }) {
   };
 
   return (
-    <div className="login">
+    <div className="login" data-testid="login">
       <div className="login__container">
         <div className="login__logo">
           <Logo white animated />
