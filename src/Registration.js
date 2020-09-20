@@ -34,7 +34,7 @@ function Registration({ onPageChange }) {
     <div className="registration">
       <div className="registration__container">
         <div className="registration__logo">
-          <Logo white />
+          <Logo white animated />
         </div>
         <Paper className="registration__form">
           <form className="form">

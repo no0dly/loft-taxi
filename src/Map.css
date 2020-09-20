@@ -1,3 +1,10 @@
+.map {
+  position: relative;
+  height: calc(100% - 65px);
+  width: 100%;
+  overflow: hidden;
+}
+
 .map-container {
   position: absolute;
   top: 0;

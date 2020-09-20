@@ -17,6 +17,10 @@ function Map() {
     return () => myMap.remove();
   });
 
-  return <div className="map-container" ref={mapContainer} />;
+  return (
+    <div className="map">
+      <div className="map-container" ref={mapContainer} />;
+    </div>
+  );
 }
 export default Map;
