@@ -43,7 +43,7 @@ function Login({ onPageChange }) {
           <Logo white animated />
         </div>
         <Paper className="login__form">
-          <form className="form" onSubmit={login}>
+          <form className="form" onSubmit={login} autoComplete="off">
             <div className="title">
               <div className="title__header">
                 <Typography variant="h4">Войти</Typography>

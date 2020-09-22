@@ -41,7 +41,12 @@ function Header({ onPageChange }) {
             <ul className="nav__list">
               {buttonList.map(({ name, text }) => (
                 <li className="nav__item" key={name}>
-                  <Button onClick={() => onPageChange(name)}>{text}</Button>
+                  <Button
+                    onClick={() => onPageChange(name)}
+                    data-testid="nav-button"
+                  >
+                    {text}
+                  </Button>
                 </li>
               ))}
             </ul>
