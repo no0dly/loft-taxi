@@ -1,0 +1,14 @@
+.map {
+  position: relative;
+  height: calc(100% - 65px);
+  width: 100%;
+  overflow: hidden;
+}
+
+.map-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

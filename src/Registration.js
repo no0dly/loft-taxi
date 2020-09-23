@@ -1,5 +1,21 @@
 import React, { useState } from "react";
+import { func } from "prop-types";
+import { Logo } from "loft-taxi-mui-theme";
+import {
+  Typography,
+  Link,
+  TextField,
+  Paper,
+  Grid,
+  Button,
+} from "@material-ui/core";
 import "./Registration.css";
+
+import { pageNames } from "./constants";
+
+const proopTypes = {
+  onPageChange: func.isRequired,
+};
 
 function Registration({ onPageChange }) {
   const [formFields, setFormField] = useState({
@@ -17,88 +33,91 @@ function Registration({ onPageChange }) {
   };
 
   return (
-    <div className="registration">
-      <div className="registration__form">
-        <form className="form">
-          <div className="title">
-            <div>
-              <h3>Регистрация</h3>
+    <div className="registration" data-testid="registration">
+      <div className="registration__container">
+        <div className="registration__logo">
+          <Logo white animated />
+        </div>
+        <Paper className="registration__form">
+          <form className="form" onSubmit={() => onPageChange(pageNames.MAP)}>
+            <div className="title">
+              <div className="title__header">
+                <Typography variant="h4">Регистрация</Typography>
+              </div>
+              <div className="title__subtext">
+                <Typography variant="body1">
+                  Уже зарегистрирован?{" "}
+                  <Link onClick={() => onPageChange(pageNames.LOGIN)}>
+                    Войти
+                  </Link>
+                </Typography>
+              </div>
             </div>
-            <div>
-              <span>
-                Уже зарегистрирован?{" "}
-                <button onClick={onPageChange} name="LOGIN">
-                  Войти
-                </button>
-              </span>
-            </div>
-          </div>
-          <div className="form__container">
-            <div className="field field--full">
-              <label htmlFor="email" className="field__label">
-                Адрес электронной почты
-              </label>
-              <input
-                id="email"
-                type="email"
-                className="field__input"
-                name="email"
-                value={formFields.email}
-                onChange={onChange}
-              />
-            </div>
-            <div className="field field--half">
-              <label htmlFor="name" className="field__label">
-                Имя
-              </label>
-              <input
-                id="name"
-                type="text"
-                className="field__input"
-                name="name"
-                value={formFields.name}
-                onChange={onChange}
-              />
-            </div>
-            <div className="field field--half">
-              <label htmlFor="last-name" className="field__label">
-                Фамилия
-              </label>
-              <input
-                id="last-name"
-                type="text"
-                className="field__input"
-                name="lastName"
-                value={formFields.lastName}
-                onChange={onChange}
-              />
-            </div>
-            <div className="field field--full">
-              <label htmlFor="password" className="field__label">
-                Пароль
-              </label>
-              <input
-                id="password"
-                type="password"
-                className="field__input"
-                name="password"
-                value={formFields.password}
-                onChange={onChange}
-              />
-            </div>
-            <div className="actions">
-              <button
-                className="actions__button"
-                name="MAP"
-                onClick={onPageChange}
-              >
-                Зарегистрироваться
-              </button>
-            </div>
-          </div>
-        </form>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <div className="form__field">
+                  <TextField
+                    id="email"
+                    label="Адрес электронной почты"
+                    type="email"
+                    fullWidth
+                    name="email"
+                    value={formFields.email}
+                    onChange={onChange}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6} className="form__field">
+                <div className="form__field">
+                  <TextField
+                    id="name"
+                    label="Имя"
+                    fullWidth
+                    name="name"
+                    value={formFields.name}
+                    onChange={onChange}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={6} className="form__field">
+                <div className="form__field">
+                  <TextField
+                    id="lastName"
+                    label="Фамилия"
+                    fullWidth
+                    name="lastName"
+                    value={formFields.lastName}
+                    onChange={onChange}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={12} className="form__field">
+                <div className="form__field">
+                  <TextField
+                    id="password"
+                    type="password"
+                    label="Пароль"
+                    fullWidth
+                    name="password"
+                    value={formFields.password}
+                    onChange={onChange}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={12} className="form__field form__action">
+                <div className="form__field">
+                  <Button type="submit" variant="contained" color="primary">
+                    Зарегистрироваться
+                  </Button>
+                </div>
+              </Grid>
+            </Grid>
+          </form>
+        </Paper>
       </div>
     </div>
   );
 }
+
+Registration.proopTypes = proopTypes;
 export default Registration;

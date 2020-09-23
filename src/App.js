@@ -5,27 +5,37 @@ import Login from "./Login";
 import Map from "./Map";
 import Profile from "./Profile";
 import Registration from "./Registration";
+import AuthProvider from "./AuthContext";
+import { pageNames } from "./constants";
+
+export const AuthContext = React.createContext();
 
 function App() {
-  const [page, setPage] = useState("REGISTRATION");
-  const onPageChange = (e) => {
-    e.preventDefault();
+  const [page, setPage] = useState(pageNames.REGISTRATION);
 
-    setPage(e.target.name);
+  const onPageChange = (pageName) => {
+    setPage(pageName);
   };
 
+  const isLoginPages =
+    page === pageNames.LOGIN || page === pageNames.REGISTRATION;
+
   return (
-    <div className="app">
-      <Header onPageChange={onPageChange} />
-      {
+    <AuthProvider changePage={setPage}>
+      <div className="app" data-testid="app">
+        {!isLoginPages && <Header onPageChange={onPageChange} />}
         {
-          LOGIN: <Login onPageChange={onPageChange} />,
-          REGISTRATION: <Registration onPageChange={onPageChange} />,
-          MAP: <Map />,
-          PROFILE: <Profile />,
-        }[page]
-      }
-    </div>
+          {
+            [pageNames.LOGIN]: <Login onPageChange={onPageChange} />,
+            [pageNames.REGISTRATION]: (
+              <Registration onPageChange={onPageChange} />
+            ),
+            [pageNames.MAP]: <Map />,
+            [pageNames.PROFILE]: <Profile />,
+          }[page]
+        }
+      </div>
+    </AuthProvider>
   );
 }
 

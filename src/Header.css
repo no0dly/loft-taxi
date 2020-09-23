@@ -1,7 +1,11 @@
-.container {
+.header {
+  position: relative;
+  z-index: 1;
+}
+
+.flex {
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px;
   align-items: center;
 }
 
