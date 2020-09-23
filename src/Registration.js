@@ -11,6 +11,8 @@ import {
 } from "@material-ui/core";
 import "./Registration.css";
 
+import { pageNames } from "./constants";
+
 const proopTypes = {
   onPageChange: func.isRequired,
 };
@@ -37,7 +39,7 @@ function Registration({ onPageChange }) {
           <Logo white animated />
         </div>
         <Paper className="registration__form">
-          <form className="form">
+          <form className="form" onSubmit={() => onPageChange(pageNames.MAP)}>
             <div className="title">
               <div className="title__header">
                 <Typography variant="h4">Регистрация</Typography>
@@ -45,7 +47,9 @@ function Registration({ onPageChange }) {
               <div className="title__subtext">
                 <Typography variant="body1">
                   Уже зарегистрирован?{" "}
-                  <Link onClick={() => onPageChange("LOGIN")}>Войти</Link>
+                  <Link onClick={() => onPageChange(pageNames.LOGIN)}>
+                    Войти
+                  </Link>
                 </Typography>
               </div>
             </div>
@@ -102,11 +106,7 @@ function Registration({ onPageChange }) {
               </Grid>
               <Grid item xs={12} className="form__field form__action">
                 <div className="form__field">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => onPageChange("MAP")}
-                  >
+                  <Button type="submit" variant="contained" color="primary">
                     Зарегистрироваться
                   </Button>
                 </div>

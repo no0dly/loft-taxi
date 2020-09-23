@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { func, node } from "prop-types";
+import { pageNames } from "./constants";
 
 export const AuthContext = React.createContext();
 
@@ -12,17 +13,13 @@ function AuthProvider({ children, changePage }) {
   const [isLoggedIn, setAuth] = useState(false);
 
   const login = (email, password) => {
-    console.log("Login is process", email, password);
     setAuth(true);
-    console.log("Login is done");
-    changePage("MAP");
+    changePage(pageNames.MAP);
   };
 
   const logout = () => {
-    console.log("Logout is process");
     setAuth(false);
-    console.log("Logout is done");
-    changePage("LOGIN");
+    changePage(pageNames.LOGIN);
   };
   return (
     <AuthContext.Provider

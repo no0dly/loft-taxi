@@ -6,17 +6,19 @@ import Map from "./Map";
 import Profile from "./Profile";
 import Registration from "./Registration";
 import AuthProvider from "./AuthContext";
+import { pageNames } from "./constants";
 
 export const AuthContext = React.createContext();
 
 function App() {
-  const [page, setPage] = useState("REGISTRATION");
+  const [page, setPage] = useState(pageNames.REGISTRATION);
 
   const onPageChange = (pageName) => {
     setPage(pageName);
   };
 
-  const isLoginPages = page === "LOGIN" || page === "REGISTRATION";
+  const isLoginPages =
+    page === pageNames.LOGIN || page === pageNames.REGISTRATION;
 
   return (
     <AuthProvider changePage={setPage}>
@@ -24,10 +26,12 @@ function App() {
         {!isLoginPages && <Header onPageChange={onPageChange} />}
         {
           {
-            LOGIN: <Login onPageChange={onPageChange} />,
-            REGISTRATION: <Registration onPageChange={onPageChange} />,
-            MAP: <Map />,
-            PROFILE: <Profile />,
+            [pageNames.LOGIN]: <Login onPageChange={onPageChange} />,
+            [pageNames.REGISTRATION]: (
+              <Registration onPageChange={onPageChange} />
+            ),
+            [pageNames.MAP]: <Map />,
+            [pageNames.PROFILE]: <Profile />,
           }[page]
         }
       </div>

@@ -14,6 +14,8 @@ import {
 import { AuthContext } from "./AuthContext";
 import "./Login.css";
 
+import { pageNames } from "./constants";
+
 const proopTypes = {
   onPageChange: func.isRequired,
 };
@@ -51,7 +53,7 @@ function Login({ onPageChange }) {
               <div className="title__subtext">
                 <Typography variant="body1">
                   Новый пользователь?{" "}
-                  <Link onClick={() => onPageChange("REGISTRATION")}>
+                  <Link onClick={() => onPageChange(pageNames.REGISTRATION)}>
                     Зарегистрируйтесь
                   </Link>
                 </Typography>
@@ -86,12 +88,7 @@ function Login({ onPageChange }) {
               </Grid>
               <Grid item xs={12}>
                 <div className="form__field">
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    // onClick={() => onPageChange("MAP")}
-                  >
+                  <Button type="submit" variant="contained" color="primary">
                     Войти
                   </Button>
                 </div>

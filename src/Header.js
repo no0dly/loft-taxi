@@ -3,6 +3,7 @@ import { Logo } from "loft-taxi-mui-theme";
 import "./Header.css";
 import { func } from "prop-types";
 import { Button, Container, Paper } from "@material-ui/core";
+import { pageNames } from "./constants";
 
 const proopTypes = {
   onPageChange: func.isRequired,
@@ -10,15 +11,15 @@ const proopTypes = {
 
 const buttonList = [
   {
-    name: "MAP",
+    name: pageNames.MAP,
     text: "Карта",
   },
   {
-    name: "PROFILE",
+    name: pageNames.PROFILE,
     text: "Профиль",
   },
   {
-    name: "REGISTRATION",
+    name: pageNames.REGISTRATION,
     text: "Войти",
   },
 ];
