@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { func } from "prop-types";
 import { Logo } from "loft-taxi-mui-theme";
-
+import { NavLink } from "react-router-dom";
 import {
   Typography,
   Link,
@@ -14,13 +14,13 @@ import {
 import { AuthContext } from "./AuthContext";
 import "./Login.css";
 
-import { pageNames } from "./constants";
+import { pageUrls } from "./constants";
 
 const proopTypes = {
   onPageChange: func.isRequired,
 };
 
-function Login({ onPageChange }) {
+function Login() {
   const [formFields, setFields] = useState({
     email: "",
     password: "",
@@ -53,7 +53,7 @@ function Login({ onPageChange }) {
               <div className="title__subtext">
                 <Typography variant="body1">
                   Новый пользователь?{" "}
-                  <Link onClick={() => onPageChange(pageNames.REGISTRATION)}>
+                  <Link to={pageUrls.REGISTRATION} component={NavLink}>
                     Зарегистрируйтесь
                   </Link>
                 </Typography>

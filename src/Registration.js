@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import { func } from "prop-types";
 import { Logo } from "loft-taxi-mui-theme";
 import {
@@ -11,25 +12,30 @@ import {
 } from "@material-ui/core";
 import "./Registration.css";
 
-import { pageNames } from "./constants";
+import { pageUrls } from "./constants";
 
 const proopTypes = {
   onPageChange: func.isRequired,
 };
 
-function Registration({ onPageChange }) {
+function Registration() {
   const [formFields, setFormField] = useState({
     email: "",
     name: "",
     lastName: "",
     password: "",
   });
+  const history = useHistory();
 
   const onChange = (e) => {
     setFormField({
       ...formFields,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const onSubmit = () => {
+    history.push(pageUrls.MAP);
   };
 
   return (
@@ -39,7 +45,7 @@ function Registration({ onPageChange }) {
           <Logo white animated />
         </div>
         <Paper className="registration__form">
-          <form className="form" onSubmit={() => onPageChange(pageNames.MAP)}>
+          <form className="form" onSubmit={onSubmit}>
             <div className="title">
               <div className="title__header">
                 <Typography variant="h4">Регистрация</Typography>
@@ -47,7 +53,7 @@ function Registration({ onPageChange }) {
               <div className="title__subtext">
                 <Typography variant="body1">
                   Уже зарегистрирован?{" "}
-                  <Link onClick={() => onPageChange(pageNames.LOGIN)}>
+                  <Link to={pageUrls.LOGIN} component={NavLink}>
                     Войти
                   </Link>
                 </Typography>

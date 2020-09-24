@@ -1,25 +1,21 @@
 import React, { useState } from "react";
-import { func, node } from "prop-types";
-import { pageNames } from "./constants";
+import { node } from "prop-types";
 
 export const AuthContext = React.createContext();
 
 const propTypes = {
   children: node.isRequired,
-  changePage: func.isRequired,
 };
 
-function AuthProvider({ children, changePage }) {
+function AuthProvider({ children }) {
   const [isLoggedIn, setAuth] = useState(false);
 
   const login = (email, password) => {
     setAuth(true);
-    changePage(pageNames.MAP);
   };
 
   const logout = () => {
     setAuth(false);
-    changePage(pageNames.LOGIN);
   };
   return (
     <AuthContext.Provider

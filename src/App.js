@@ -1,39 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Header from "./Header";
-import Login from "./Login";
-import Map from "./Map";
-import Profile from "./Profile";
-import Registration from "./Registration";
+import View from "./View";
 import AuthProvider from "./AuthContext";
-import { pageNames } from "./constants";
-
-export const AuthContext = React.createContext();
+import { useLocation } from "react-router-dom";
+import { pageUrls } from "./constants";
 
 function App() {
-  const [page, setPage] = useState(pageNames.REGISTRATION);
-
-  const onPageChange = (pageName) => {
-    setPage(pageName);
-  };
+  const { pathname } = useLocation();
 
   const isLoginPages =
-    page === pageNames.LOGIN || page === pageNames.REGISTRATION;
+    pathname === pageUrls.LOGIN || pathname === pageUrls.HOME;
 
   return (
-    <AuthProvider changePage={setPage}>
+    <AuthProvider>
       <div className="app" data-testid="app">
-        {!isLoginPages && <Header onPageChange={onPageChange} />}
-        {
-          {
-            [pageNames.LOGIN]: <Login onPageChange={onPageChange} />,
-            [pageNames.REGISTRATION]: (
-              <Registration onPageChange={onPageChange} />
-            ),
-            [pageNames.MAP]: <Map />,
-            [pageNames.PROFILE]: <Profile />,
-          }[page]
-        }
+        {!isLoginPages && <Header />}
+        <View />
       </div>
     </AuthProvider>
   );

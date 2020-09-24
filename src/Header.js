@@ -1,9 +1,11 @@
 import React from "react";
 import { Logo } from "loft-taxi-mui-theme";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import { func } from "prop-types";
-import { Button, Container, Paper } from "@material-ui/core";
-import { pageNames } from "./constants";
+import { Container, Paper, Button } from "@material-ui/core";
+
+import { pageUrls } from "./constants";
 
 const proopTypes = {
   onPageChange: func.isRequired,
@@ -11,20 +13,20 @@ const proopTypes = {
 
 const buttonList = [
   {
-    name: pageNames.MAP,
+    url: pageUrls.MAP,
     text: "Карта",
   },
   {
-    name: pageNames.PROFILE,
+    url: pageUrls.PROFILE,
     text: "Профиль",
   },
   {
-    name: pageNames.REGISTRATION,
+    url: pageUrls.REGISTRATION,
     text: "Войти",
   },
 ];
 
-function Header({ onPageChange }) {
+function Header() {
   return (
     <Paper
       elevation={4}
@@ -40,12 +42,9 @@ function Header({ onPageChange }) {
           </div>
           <nav className="nav">
             <ul className="nav__list">
-              {buttonList.map(({ name, text }) => (
-                <li className="nav__item" key={name}>
-                  <Button
-                    onClick={() => onPageChange(name)}
-                    data-testid="nav-button"
-                  >
+              {buttonList.map(({ url, text }) => (
+                <li className="nav__item" key={text}>
+                  <Button to={url} component={Link} data-testid="nav-button">
                     {text}
                   </Button>
                 </li>
