@@ -22,8 +22,9 @@ export default (store) => (next) => (action) => {
 
         if (data && data.success) {
           store.dispatch(loginSuccess());
+        } else {
+          store.dispatch(loginFailure());
         }
-        store.dispatch(loginFailure());
       })
       .catch((e) => {
         loginFailure();

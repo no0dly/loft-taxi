@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { func } from "prop-types";
+import { func, bool } from "prop-types";
 import { Logo } from "loft-taxi-mui-theme";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import {
   Typography,
   Link,
@@ -16,13 +16,19 @@ import "./Login.css";
 
 import { pageUrls } from "./constants";
 
+import authSelector from "./selectors/auth";
 import * as actions from "./redux/actions";
 
 const proopTypes = {
   onPageChange: func.isRequired,
+  isLoggedIn: bool.isRequired,
+  isLoading: bool.isRequired,
+  isLoaded: bool.isRequired,
+  error: bool.isRequired,
 };
 
-function Login({ loginRequest }) {
+function Login({ loginRequest, isLoggedIn, isLoading, isLoaded, error }) {
+  const history = useHistory();
   const [formFields, setFields] = useState({
     email: "",
     password: "",
@@ -39,6 +45,14 @@ function Login({ loginRequest }) {
 
     loginRequest({ email: formFields.email, password: formFields.password });
   };
+
+  useEffect(() => {
+    if (isLoaded && !error) {
+      history.push(pageUrls.MAP);
+    } else if (isLoaded && error) {
+      console.log("error");
+    }
+  }, [isLoaded, error]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="login" data-testid="login">
@@ -105,4 +119,4 @@ function Login({ loginRequest }) {
 
 Login.proopTypes = proopTypes;
 
-export default connect(null, actions)(Login);
+export default connect(authSelector, actions)(Login);
