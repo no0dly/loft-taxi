@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import { func } from "prop-types";
 import { Logo } from "loft-taxi-mui-theme";
 import { NavLink } from "react-router-dom";
@@ -11,22 +12,22 @@ import {
   Button,
 } from "@material-ui/core";
 
-import { AuthContext } from "./AuthContext";
 import "./Login.css";
 
 import { pageUrls } from "./constants";
+
+import * as actions from "./redux/actions";
 
 const proopTypes = {
   onPageChange: func.isRequired,
 };
 
-function Login() {
+function Login({ loginRequest }) {
   const [formFields, setFields] = useState({
     email: "",
     password: "",
   });
 
-  const auth = useContext(AuthContext);
   const onChange = (e) => {
     setFields({
       ...formFields,
@@ -35,7 +36,8 @@ function Login() {
   };
   const login = (e) => {
     e.preventDefault();
-    auth.login(formFields.email, formFields.password);
+
+    loginRequest({ email: formFields.email, password: formFields.password });
   };
 
   return (
@@ -103,4 +105,4 @@ function Login() {
 
 Login.proopTypes = proopTypes;
 
-export default Login;
+export default connect(null, actions)(Login);
