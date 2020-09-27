@@ -1,14 +1,16 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Logo } from "loft-taxi-mui-theme";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Header.css";
 import { func } from "prop-types";
 import { Container, Paper, Button } from "@material-ui/core";
 
 import { pageUrls } from "./constants";
+import * as actions from "./redux/actions";
 
 const proopTypes = {
-  onPageChange: func.isRequired,
+  logout: func.isRequired,
 };
 
 const buttonList = [
@@ -21,12 +23,17 @@ const buttonList = [
     text: "Профиль",
   },
   {
-    url: pageUrls.REGISTRATION,
-    text: "Войти",
+    type: "logout",
+    text: "Выйти",
   },
 ];
 
-function Header() {
+export function Header({ logout }) {
+  const history = useHistory();
+  const onLogout = () => {
+    logout();
+    history.push(pageUrls.LOGIN);
+  };
   return (
     <Paper
       elevation={4}
@@ -44,9 +51,19 @@ function Header() {
             <ul className="nav__list">
               {buttonList.map(({ url, text }) => (
                 <li className="nav__item" key={text}>
-                  <Button to={url} component={Link} data-testid="nav-button">
-                    {text}
-                  </Button>
+                  {url ? (
+                    <Button to={url} component={Link} data-testid="nav-button">
+                      {text}
+                    </Button>
+                  ) : (
+                    <Button
+                      to={url}
+                      onClick={onLogout}
+                      data-testid="nav-button"
+                    >
+                      {text}
+                    </Button>
+                  )}
                 </li>
               ))}
             </ul>
@@ -58,4 +75,4 @@ function Header() {
 }
 
 Header.proopTypes = proopTypes;
-export default Header;
+export default connect(null, actions)(Header);

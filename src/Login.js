@@ -21,18 +21,28 @@ import * as actions from "./redux/actions";
 
 const proopTypes = {
   onPageChange: func.isRequired,
-  isLoggedIn: bool.isRequired,
-  isLoading: bool.isRequired,
+  resetLoginStatus: func.isRequired,
   isLoaded: bool.isRequired,
   error: bool.isRequired,
 };
 
-function Login({ loginRequest, isLoggedIn, isLoading, isLoaded, error }) {
+export function Login({ loginRequest, resetLoginStatus, isLoaded, error }) {
   const history = useHistory();
   const [formFields, setFields] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (isLoaded && !error) {
+      history.push(pageUrls.MAP);
+    } else if (isLoaded && error) {
+      console.log("error");
+    }
+    return () => {
+      resetLoginStatus();
+    };
+  }, [isLoaded, error]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onChange = (e) => {
     setFields({
@@ -45,14 +55,6 @@ function Login({ loginRequest, isLoggedIn, isLoading, isLoaded, error }) {
 
     loginRequest({ email: formFields.email, password: formFields.password });
   };
-
-  useEffect(() => {
-    if (isLoaded && !error) {
-      history.push(pageUrls.MAP);
-    } else if (isLoaded && error) {
-      console.log("error");
-    }
-  }, [isLoaded, error]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="login" data-testid="login">
