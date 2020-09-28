@@ -4,6 +4,7 @@ import {
   loginRequest,
   loginSuccess,
   loginFailure,
+  logout,
   registrationRequest,
   registrationSuccess,
   registrationFailure,
@@ -21,6 +22,7 @@ export default (store) => (next) => (action) => {
         const { data } = resp;
         if (data && data.success) {
           store.dispatch(loginSuccess(data.token));
+          localStorage.setItem("token", data.token);
         } else {
           store.dispatch(loginFailure());
         }
@@ -37,6 +39,7 @@ export default (store) => (next) => (action) => {
         const { data } = resp;
         if (data && data.success) {
           store.dispatch(registrationSuccess(data.token));
+          localStorage.setItem("token", data.token);
         } else {
           store.dispatch(registrationFailure());
         }
@@ -44,6 +47,9 @@ export default (store) => (next) => (action) => {
       .catch((e) => {
         registrationFailure();
       });
+  }
+  if (action.type === logout.toString()) {
+    localStorage.removeItem("token");
   }
 
   return next(action);

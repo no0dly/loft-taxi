@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Paper, Typography, Grid, TextField, Button } from "@material-ui/core";
 import { MCIcon } from "loft-taxi-mui-theme";
@@ -63,6 +63,7 @@ export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
                           name="cardNumber"
                           value={cardNumber}
                           onChange={onChange}
+                          required
                         />
                       </div>
                       <div className="form__field">
@@ -75,6 +76,7 @@ export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
                           name="expiryDate"
                           value={expiryDate}
                           onChange={onChange}
+                          required
                         />
                       </div>
                     </Paper>
@@ -91,6 +93,7 @@ export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
                           placeholder="USER NAME"
                           value={cardName}
                           onChange={onChange}
+                          required
                         />
                       </div>
                       <div className="form__field">
@@ -102,6 +105,7 @@ export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
                           name="cvc"
                           value={cvc}
                           onChange={onChange}
+                          required
                         />
                       </div>
                     </Paper>

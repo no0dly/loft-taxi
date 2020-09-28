@@ -12,7 +12,7 @@ function View() {
     <Switch>
       <Route path={pageUrls.HOME} component={Registration} exact />
       <Route path={pageUrls.LOGIN} component={Login} />
-      <Route path={pageUrls.PROFILE} component={Profile} />
+      <PrivatRoute path={pageUrls.PROFILE} component={Profile} />
       <PrivatRoute path={pageUrls.MAP} component={Map} />
       <Redirect from={pageUrls.REGISTRATION} to={pageUrls.HOME} />
     </Switch>
