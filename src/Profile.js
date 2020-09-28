@@ -2,35 +2,36 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Paper, Typography, Grid, TextField, Button } from "@material-ui/core";
 import { MCIcon } from "loft-taxi-mui-theme";
-import { func } from "prop-types";
+import { func, shape, string } from "prop-types";
 import "./Profile.css";
 import * as actions from "./redux/actions";
+import cardDetailsSelector from "./selectors/cardDetails";
 
 const proopTypes = {
   saveCardRequest: func.isRequired,
+  profileFieldChange: func.isRequired,
+  cardDetails: shape({
+    cardNumber: string.isRequired,
+    expiryDate: string.isRequired,
+    cardName: string.isRequired,
+    cvc: string.isRequired,
+  }),
 };
 
-export function Profile({ saveCardRequest }) {
-  const [formFields, setFields] = useState({
-    cardNumber: "",
-    expiryDate: "",
-    cardName: "",
-    cvc: "",
-  });
-
+export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
   const onChange = (e) => {
-    setFields({
-      ...formFields,
-      [e.target.name]: e.target.value,
+    profileFieldChange({
+      name: e.target.name,
+      value: e.target.value,
     });
   };
 
   const submit = (e) => {
     e.preventDefault();
 
-    saveCardRequest(formFields);
+    saveCardRequest();
   };
-
+  const { cardNumber, expiryDate, cardName, cvc } = cardDetails;
   return (
     <div className="profile" data-testid="profile">
       <div className="profile__container">
@@ -60,7 +61,7 @@ export function Profile({ saveCardRequest }) {
                           fullWidth
                           placeholder="0000 0000 0000 0000"
                           name="cardNumber"
-                          value={formFields.cardNumber}
+                          value={cardNumber}
                           onChange={onChange}
                         />
                       </div>
@@ -72,7 +73,7 @@ export function Profile({ saveCardRequest }) {
                           fullWidth
                           placeholder="00 / 00"
                           name="expiryDate"
-                          value={formFields.expiryDate}
+                          value={expiryDate}
                           onChange={onChange}
                         />
                       </div>
@@ -88,7 +89,7 @@ export function Profile({ saveCardRequest }) {
                           fullWidth
                           name="cardName"
                           placeholder="USER NAME"
-                          value={formFields.cardName}
+                          value={cardName}
                           onChange={onChange}
                         />
                       </div>
@@ -99,7 +100,7 @@ export function Profile({ saveCardRequest }) {
                           type="cvc"
                           fullWidth
                           name="cvc"
-                          value={formFields.cvc}
+                          value={cvc}
                           onChange={onChange}
                         />
                       </div>
@@ -121,4 +122,4 @@ export function Profile({ saveCardRequest }) {
 }
 
 Profile.proopTypes = proopTypes;
-export default connect(null, actions)(Profile);
+export default connect(cardDetailsSelector, actions)(Profile);

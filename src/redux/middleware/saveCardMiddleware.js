@@ -10,10 +10,11 @@ export default (store) => (next) => (action) => {
   if (action.type === saveCardRequest.toString()) {
     const state = store.getState();
     const { token } = state.auth;
+    const { cardDetails } = state;
 
     instance
       .post("/card", {
-        ...action.payload,
+        ...cardDetails,
         token,
       })
       .then((resp) => {
