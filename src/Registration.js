@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
-import { func } from "prop-types";
+import { func, bool } from "prop-types";
 import { Logo } from "loft-taxi-mui-theme";
 import {
   Typography,
@@ -14,15 +15,26 @@ import "./Registration.css";
 
 import { pageUrls } from "./constants";
 
+import * as actions from "./redux/actions";
+import authSelector from "./selectors/auth";
+
 const proopTypes = {
-  onPageChange: func.isRequired,
+  registrationRequest: func.isRequired,
+  resetLoginStatus: func.isRequired,
+  isLoaded: bool.isRequired,
+  error: bool.isRequired,
 };
 
-function Registration() {
+function Registration({
+  registrationRequest,
+  resetLoginStatus,
+  isLoaded,
+  error,
+}) {
   const [formFields, setFormField] = useState({
     email: "",
     name: "",
-    lastName: "",
+    surname: "",
     password: "",
   });
   const history = useHistory();
@@ -34,8 +46,20 @@ function Registration() {
     });
   };
 
-  const onSubmit = () => {
-    history.push(pageUrls.MAP);
+  useEffect(() => {
+    if (isLoaded && !error) {
+      history.push(pageUrls.MAP);
+    } else if (isLoaded && error) {
+      console.log("error");
+    }
+    return () => {
+      resetLoginStatus();
+    };
+  }, [isLoaded, error]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    registrationRequest(formFields);
   };
 
   return (
@@ -69,6 +93,7 @@ function Registration() {
                     fullWidth
                     name="email"
                     value={formFields.email}
+                    required
                     onChange={onChange}
                   />
                 </div>
@@ -81,6 +106,7 @@ function Registration() {
                     fullWidth
                     name="name"
                     value={formFields.name}
+                    required
                     onChange={onChange}
                   />
                 </div>
@@ -88,11 +114,12 @@ function Registration() {
               <Grid item xs={6} className="form__field">
                 <div className="form__field">
                   <TextField
-                    id="lastName"
+                    id="surname"
                     label="Фамилия"
                     fullWidth
-                    name="lastName"
-                    value={formFields.lastName}
+                    name="surname"
+                    value={formFields.surname}
+                    required
                     onChange={onChange}
                   />
                 </div>
@@ -106,6 +133,7 @@ function Registration() {
                     fullWidth
                     name="password"
                     value={formFields.password}
+                    required
                     onChange={onChange}
                   />
                 </div>
@@ -126,4 +154,4 @@ function Registration() {
 }
 
 Registration.proopTypes = proopTypes;
-export default Registration;
+export default connect(authSelector, actions)(Registration);

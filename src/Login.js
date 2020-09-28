@@ -20,7 +20,7 @@ import authSelector from "./selectors/auth";
 import * as actions from "./redux/actions";
 
 const proopTypes = {
-  onPageChange: func.isRequired,
+  loginRequest: func.isRequired,
   resetLoginStatus: func.isRequired,
   isLoaded: bool.isRequired,
   error: bool.isRequired,
@@ -53,7 +53,7 @@ export function Login({ loginRequest, resetLoginStatus, isLoaded, error }) {
   const login = (e) => {
     e.preventDefault();
 
-    loginRequest({ email: formFields.email, password: formFields.password });
+    loginRequest(formFields);
   };
 
   return (
@@ -86,6 +86,7 @@ export function Login({ loginRequest, resetLoginStatus, isLoaded, error }) {
                     type="email"
                     fullWidth
                     name="email"
+                    required
                     value={formFields.email}
                     onChange={onChange}
                   />
@@ -99,6 +100,7 @@ export function Login({ loginRequest, resetLoginStatus, isLoaded, error }) {
                     label="Пароль"
                     fullWidth
                     name="password"
+                    required
                     value={formFields.password}
                     onChange={onChange}
                   />

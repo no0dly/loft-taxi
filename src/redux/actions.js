@@ -10,3 +10,7 @@ export const logout = createAction("LOGOUT");
 export const saveCardRequest = createAction("SAVE_CARD_REQUEST");
 export const saveCardSuccess = createAction("SAVE_CARD_SUCCESS");
 export const saveCardFailure = createAction("SAVE_CARD_FAILURE");
+
+export const registrationRequest = createAction("REGISTRATION_REQUEST");
+export const registrationSuccess = createAction("REGISTRATION_SUCCESS");
+export const registrationFailure = createAction("REGISTRATION_FAILURE");
