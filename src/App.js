@@ -13,7 +13,7 @@ const proopTypes = {
   loginSuccess: func.isRequired,
 };
 
-function App({ loginSuccess }) {
+export function App({ loginSuccess }) {
   const { pathname } = useLocation();
 
   const isLoginPages =

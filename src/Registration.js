@@ -25,7 +25,7 @@ const proopTypes = {
   error: bool.isRequired,
 };
 
-function Registration({
+export function Registration({
   registrationRequest,
   resetLoginStatus,
   isLoaded,
