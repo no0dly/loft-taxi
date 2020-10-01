@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { func } from "prop-types";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom";
+import { func, bool } from "prop-types";
 import { Logo } from "loft-taxi-mui-theme";
 import {
   Typography,
@@ -11,25 +13,53 @@ import {
 } from "@material-ui/core";
 import "./Registration.css";
 
-import { pageNames } from "./constants";
+import { pageUrls } from "./constants";
+
+import * as actions from "./redux/actions";
+import authSelector from "./selectors/auth";
 
 const proopTypes = {
-  onPageChange: func.isRequired,
+  registrationRequest: func.isRequired,
+  resetLoginStatus: func.isRequired,
+  isLoaded: bool.isRequired,
+  error: bool.isRequired,
 };
 
-function Registration({ onPageChange }) {
+export function Registration({
+  registrationRequest,
+  resetLoginStatus,
+  isLoaded,
+  error,
+}) {
   const [formFields, setFormField] = useState({
     email: "",
     name: "",
-    lastName: "",
+    surname: "",
     password: "",
   });
+  const history = useHistory();
 
   const onChange = (e) => {
     setFormField({
       ...formFields,
       [e.target.name]: e.target.value,
     });
+  };
+
+  useEffect(() => {
+    if (isLoaded && !error) {
+      history.push(pageUrls.MAP);
+    } else if (isLoaded && error) {
+      console.log("error");
+    }
+    return () => {
+      resetLoginStatus();
+    };
+  }, [isLoaded, error]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    registrationRequest(formFields);
   };
 
   return (
@@ -39,7 +69,7 @@ function Registration({ onPageChange }) {
           <Logo white animated />
         </div>
         <Paper className="registration__form">
-          <form className="form" onSubmit={() => onPageChange(pageNames.MAP)}>
+          <form className="form" onSubmit={onSubmit}>
             <div className="title">
               <div className="title__header">
                 <Typography variant="h4">Регистрация</Typography>
@@ -47,7 +77,7 @@ function Registration({ onPageChange }) {
               <div className="title__subtext">
                 <Typography variant="body1">
                   Уже зарегистрирован?{" "}
-                  <Link onClick={() => onPageChange(pageNames.LOGIN)}>
+                  <Link to={pageUrls.LOGIN} component={NavLink}>
                     Войти
                   </Link>
                 </Typography>
@@ -63,6 +93,7 @@ function Registration({ onPageChange }) {
                     fullWidth
                     name="email"
                     value={formFields.email}
+                    required
                     onChange={onChange}
                   />
                 </div>
@@ -75,6 +106,7 @@ function Registration({ onPageChange }) {
                     fullWidth
                     name="name"
                     value={formFields.name}
+                    required
                     onChange={onChange}
                   />
                 </div>
@@ -82,11 +114,12 @@ function Registration({ onPageChange }) {
               <Grid item xs={6} className="form__field">
                 <div className="form__field">
                   <TextField
-                    id="lastName"
+                    id="surname"
                     label="Фамилия"
                     fullWidth
-                    name="lastName"
-                    value={formFields.lastName}
+                    name="surname"
+                    value={formFields.surname}
+                    required
                     onChange={onChange}
                   />
                 </div>
@@ -100,6 +133,7 @@ function Registration({ onPageChange }) {
                     fullWidth
                     name="password"
                     value={formFields.password}
+                    required
                     onChange={onChange}
                   />
                 </div>
@@ -120,4 +154,4 @@ function Registration({ onPageChange }) {
 }
 
 Registration.proopTypes = proopTypes;
-export default Registration;
+export default connect(authSelector, actions)(Registration);

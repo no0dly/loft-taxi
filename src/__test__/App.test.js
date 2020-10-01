@@ -1,24 +1,23 @@
 import React from "react";
-import App from "../App";
+import { Provider } from "react-redux";
+import { App } from "../App";
 
 import { render } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 
+import store from "../redux/store";
+
+const mockStore = store;
 describe("App component", () => {
   it("Should be rendered", () => {
-    const { getByTestId } = render(<App />);
+    const { getByTestId } = render(
+      <Provider store={mockStore}>
+        <BrowserRouter>
+          <App loginSuccess={jest.fn()} />
+        </BrowserRouter>
+      </Provider>
+    );
 
     expect(getByTestId("app")).toBeInTheDocument();
-  });
-
-  it("Should render initial page", () => {
-    const { getByTestId } = render(<App />);
-
-    expect(getByTestId("registration")).toBeInTheDocument();
-  });
-
-  it("Should not render header on initial page", () => {
-    const { queryByTestId } = render(<App />);
-
-    expect(queryByTestId(/header/i)).toBeNull();
   });
 });

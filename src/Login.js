@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
-import { func } from "prop-types";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { func, bool } from "prop-types";
 import { Logo } from "loft-taxi-mui-theme";
-
+import { NavLink, useHistory } from "react-router-dom";
 import {
   Typography,
   Link,
@@ -11,22 +12,38 @@ import {
   Button,
 } from "@material-ui/core";
 
-import { AuthContext } from "./AuthContext";
 import "./Login.css";
 
-import { pageNames } from "./constants";
+import { pageUrls } from "./constants";
+
+import authSelector from "./selectors/auth";
+import * as actions from "./redux/actions";
 
 const proopTypes = {
-  onPageChange: func.isRequired,
+  loginRequest: func.isRequired,
+  resetLoginStatus: func.isRequired,
+  isLoaded: bool.isRequired,
+  error: bool.isRequired,
 };
 
-function Login({ onPageChange }) {
+export function Login({ loginRequest, resetLoginStatus, isLoaded, error }) {
+  const history = useHistory();
   const [formFields, setFields] = useState({
     email: "",
     password: "",
   });
 
-  const auth = useContext(AuthContext);
+  useEffect(() => {
+    if (isLoaded && !error) {
+      history.push(pageUrls.MAP);
+    } else if (isLoaded && error) {
+      console.log("error");
+    }
+    return () => {
+      resetLoginStatus();
+    };
+  }, [isLoaded, error]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const onChange = (e) => {
     setFields({
       ...formFields,
@@ -35,7 +52,8 @@ function Login({ onPageChange }) {
   };
   const login = (e) => {
     e.preventDefault();
-    auth.login(formFields.email, formFields.password);
+
+    loginRequest(formFields);
   };
 
   return (
@@ -53,7 +71,7 @@ function Login({ onPageChange }) {
               <div className="title__subtext">
                 <Typography variant="body1">
                   Новый пользователь?{" "}
-                  <Link onClick={() => onPageChange(pageNames.REGISTRATION)}>
+                  <Link to={pageUrls.REGISTRATION} component={NavLink}>
                     Зарегистрируйтесь
                   </Link>
                 </Typography>
@@ -68,6 +86,7 @@ function Login({ onPageChange }) {
                     type="email"
                     fullWidth
                     name="email"
+                    required
                     value={formFields.email}
                     onChange={onChange}
                   />
@@ -81,6 +100,7 @@ function Login({ onPageChange }) {
                     label="Пароль"
                     fullWidth
                     name="password"
+                    required
                     value={formFields.password}
                     onChange={onChange}
                   />
@@ -103,4 +123,4 @@ function Login({ onPageChange }) {
 
 Login.proopTypes = proopTypes;
 
-export default Login;
+export default connect(authSelector, actions)(Login);

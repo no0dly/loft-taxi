@@ -1,6 +1,7 @@
-export const pageNames = {
-  MAP: "MAP",
-  PROFILE: "PROFILE",
-  REGISTRATION: "REGISTRATION",
-  LOGIN: "LOGIN",
+export const pageUrls = {
+  HOME: "/",
+  MAP: "/map",
+  PROFILE: "/profile",
+  REGISTRATION: "/registration",
+  LOGIN: "/login",
 };
