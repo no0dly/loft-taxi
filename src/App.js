@@ -21,11 +21,10 @@ export function App({ loginSuccess }) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
     if (token) {
       loginSuccess(token);
     }
-  });
+  }, [loginSuccess]);
 
   return (
     <div className="app" data-testid="app">

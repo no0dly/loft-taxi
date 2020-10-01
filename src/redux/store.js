@@ -1,12 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./reducers";
-import authMiddleware from "../redux/middleware/authMiddleware";
-import saveCardMiddleware from "../redux/middleware/saveCardMiddleware";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "./saga";
+
+const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authMiddleware, saveCardMiddleware),
+    getDefaultMiddleware().concat(sagaMiddleware),
 });
+
+sagaMiddleware.run(rootSaga);
 
 export default store;
