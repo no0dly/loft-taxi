@@ -1,0 +1,17 @@
+.route-box {
+  position: absolute;
+  max-width: 300px;
+  left: 20px;
+  top: 20px;
+  z-index: 999;
+}
+
+.route-box__container {
+  padding: 44px 60px;
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.route-box__content {
+  margin-bottom: 20px;
+}

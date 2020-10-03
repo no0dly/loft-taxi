@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "./Map.css";
+import RouteBox from "./RouteBox";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoibm9vZGx5IiwiYSI6ImNrZjZmMDFsODBod2IycW83cTZ3aTBmYmgifQ.fgAUFNAyohTZH-APFqS1xA";
@@ -18,8 +19,11 @@ function Map() {
   });
 
   return (
-    <div className="map" data-testid="map">
-      <div className="map-container" ref={mapContainer} />;
+    <div className="map-page">
+      <div className="map" data-testid="map">
+        <div className="map-container" ref={mapContainer} />
+      </div>
+      <RouteBox />
     </div>
   );
 }

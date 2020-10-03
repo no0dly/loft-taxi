@@ -5,7 +5,7 @@ const cardNumber = createReducer("", {
   [profileFieldChange]: (state, actions) =>
     actions.payload.name === "cardNumber" ? actions.payload.value : state,
 });
-const expiryDate = createReducer("", {
+const expiryDate = createReducer(null, {
   [profileFieldChange]: (state, actions) =>
     actions.payload.name === "expiryDate" ? actions.payload.value : state,
 });
