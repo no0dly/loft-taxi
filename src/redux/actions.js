@@ -16,3 +16,19 @@ export const registrationSuccess = createAction("REGISTRATION_SUCCESS");
 export const registrationFailure = createAction("REGISTRATION_FAILURE");
 
 export const profileFieldChange = createAction("PROFILE_FIELD_CHANGE");
+
+export const routeFieldChange = createAction("ROUTE_FIELD_CHANGE");
+
+export const fetchAddressListRequest = createAction(
+  "FETCH_ADDRESS_LIST_REQUEST"
+);
+export const fetchAddressListSuccess = createAction(
+  "FETCH_ADDRESS_LIST_SUCCESS"
+);
+export const fetchAddressListFailure = createAction(
+  "FETCH_ADDRESS_LIST_FAILURE"
+);
+
+export const getRouteRequest = createAction("GET_ROUTE_REQUEST");
+export const getRouteSuccess = createAction("GET_ROUTE_SUCCESS");
+export const getRouteFailure = createAction("GET_ROUTE_FAILURE");

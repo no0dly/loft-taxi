@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Typography, Paper, Button } from "@material-ui/core";
+import { Typography, Button } from "@material-ui/core";
 import { pageUrls } from "./constants";
 
 function RouteBoxNoCard() {

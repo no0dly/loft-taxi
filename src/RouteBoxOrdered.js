@@ -1,8 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-import { Typography, Paper, Button } from "@material-ui/core";
-import { pageUrls } from "./constants";
+import { Typography, Button } from "@material-ui/core";
 
 import "./RouteBox.css";
 

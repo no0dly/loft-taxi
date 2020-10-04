@@ -1,53 +1,94 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import { TextField, Button } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import "./RouteBox.css";
-import { string } from "prop-types";
+import { string, func, shape } from "prop-types";
+import * as actions from "./redux/actions";
+import Selector from "./selectors/RouteBox";
 
 const proopTypes = {
-  // loginRequest: func.isRequired,
-  // resetLoginStatus: func.isRequired,
   from: string.isRequired,
-  where: string.isRequired,
+  to: string.isRequired,
+  routeFieldChange: func.isRequired,
+  fetchAddressListRequest: func.isRequired,
+  getRouteRequest: func.isRequired,
+  addressList: shape([]),
 };
 
-function RouteBoxSelect({ from, where }) {
-  const defaultProps = {
-    options: [],
-    getOptionLabel: (option) => option.title,
+function RouteBoxSelect({
+  from,
+  to,
+  routeFieldChange,
+  fetchAddressListRequest,
+  getRouteRequest,
+  addressList,
+}) {
+  const getDefaultProps = (valueToFilter) => ({
+    options: addressList.filter((item) => item !== valueToFilter),
+    getOptionLabel: (option) => option,
+  });
+
+  const placeOrder = (e) => {
+    e.preventDefault();
+
+    getRouteRequest();
   };
 
-  const placeOrder = () => {
-    console.log("place an order");
+  const setFrom = (e, newValue) => {
+    routeFieldChange({
+      name: "from",
+      value: newValue || "",
+    });
+  };
+  const setTo = (e, newValue) => {
+    routeFieldChange({
+      name: "to",
+      value: newValue || "",
+    });
   };
 
-  const onChange = () => {
-    console.log("field change");
-  };
+  useEffect(() => {
+    fetchAddressListRequest();
+  }, [fetchAddressListRequest]);
+
   return (
     <form className="form" onSubmit={placeOrder}>
       <div className="form__field">
         <Autocomplete
-          {...defaultProps}
-          id="debug"
-          debug
+          {...getDefaultProps(to)}
+          id="from"
+          onChange={setFrom}
+          data-name="from"
+          value={from}
           renderInput={(params) => (
-            <TextField {...params} label="Откуда" margin="normal" fullWidth />
+            <TextField
+              {...params}
+              label="Откуда"
+              margin="normal"
+              fullWidth
+              required
+            />
           )}
-          onChange={onChange}
         />
       </div>
       <div className="form__field">
         <Autocomplete
-          {...defaultProps}
+          {...getDefaultProps(from)}
           id="debug"
           debug
+          onChange={setTo}
+          value={to}
           renderInput={(params) => (
-            <TextField {...params} label="Куда" margin="normal" fullWidth />
+            <TextField
+              {...params}
+              label="Куда"
+              margin="normal"
+              fullWidth
+              required
+            />
           )}
-          onChange={onChange}
         />
       </div>
       <div className="actions">
@@ -60,4 +101,4 @@ function RouteBoxSelect({ from, where }) {
 }
 
 RouteBoxSelect.proopTypes = proopTypes;
-export default RouteBoxSelect;
+export default connect(Selector, actions)(RouteBoxSelect);
