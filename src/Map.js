@@ -20,7 +20,7 @@ const proopTypes = {
   changeRouteBoxView: func.isRequired,
 };
 
-function Map({ taxiRoute, routeBoxView, changeRouteBoxView }) {
+export function Map({ taxiRoute, routeBoxView, changeRouteBoxView }) {
   const mapContainer = useRef(null);
   const myMap = useRef(null);
 
