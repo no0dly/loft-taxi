@@ -1,6 +1,6 @@
 import { createSelector, createStructuredSelector } from "reselect";
 
-const authSelector = (state) => state.auth;
+export const authSelector = (state) => state.auth;
 const isLoggedInSelector = createSelector(
   authSelector,
   (auth) => auth.isLoggedIn

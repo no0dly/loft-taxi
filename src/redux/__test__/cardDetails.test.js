@@ -1,7 +1,7 @@
 import reducer from "../reducers/cardDetails";
 import { profileFieldChange } from "../actions";
 
-describe("saveCard reducer", () => {
+describe("cardStatus reducer", () => {
   const initialData = {
     cardNumber: "",
     expiryDate: "",

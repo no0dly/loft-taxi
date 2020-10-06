@@ -32,3 +32,9 @@ export const fetchAddressListFailure = createAction(
 export const getRouteRequest = createAction("GET_ROUTE_REQUEST");
 export const getRouteSuccess = createAction("GET_ROUTE_SUCCESS");
 export const getRouteFailure = createAction("GET_ROUTE_FAILURE");
+
+export const getCardRequest = createAction("GET_CARD_REQUEST");
+export const getCardSuccess = createAction("GET_CARD_SUCCESS");
+export const getCardFailure = createAction("GET_CARD_FAILURE");
+
+export const changeRouteBoxView = createAction("CHANGE_ROUTE_BOX_VIEW");

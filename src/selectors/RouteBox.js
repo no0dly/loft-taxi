@@ -26,9 +26,16 @@ const routeSelector = createSelector(taxiRouteSelector, (routesData) => {
   return taxiRoute;
 });
 
+const routeBoxViewSelector = createSelector(taxiRouteSelector, (routesData) => {
+  const { routeBoxView } = routesData;
+
+  return routeBoxView;
+});
+
 export default createStructuredSelector({
   addressList: addressListSelector,
   to: toSelector,
   from: fromSelector,
   taxiRoute: routeSelector,
+  routeBoxView: routeBoxViewSelector,
 });

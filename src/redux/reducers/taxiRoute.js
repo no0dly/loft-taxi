@@ -7,7 +7,10 @@ import {
   getRouteRequest,
   getRouteSuccess,
   // getRouteFailure,
+  changeRouteBoxView,
 } from "../actions";
+
+import { boxView } from "../../constants";
 
 const from = createReducer("", {
   [routeFieldChange]: (state, actions) =>
@@ -29,9 +32,14 @@ const taxiRoute = createReducer([], {
   [getRouteSuccess]: (state, actions) => actions.payload,
 });
 
+const routeBoxView = createReducer(boxView.NO_CARD, {
+  [changeRouteBoxView]: (state, actions) => actions.payload,
+});
+
 export default combineReducers({
   from,
   to,
   addressList,
   taxiRoute,
+  routeBoxView,
 });

@@ -1,5 +1,11 @@
 import { takeLatest, put, call, all } from "redux-saga/effects";
-import { loginRequest, loginSuccess, loginFailure, logout } from "../actions";
+import {
+  loginRequest,
+  loginSuccess,
+  loginFailure,
+  logout,
+  getCardRequest,
+} from "../actions";
 
 import { login } from "../../api";
 
@@ -9,6 +15,7 @@ export function* loginRequestSaga(action) {
     if (data && data.success) {
       yield put(loginSuccess(data.token));
       localStorage.setItem("token", data.token);
+      yield put(getCardRequest(data.token));
     } else {
       yield put(loginFailure());
     }

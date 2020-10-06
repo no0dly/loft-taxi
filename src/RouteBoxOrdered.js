@@ -1,12 +1,23 @@
 import React from "react";
+import { connect } from "react-redux";
+import { func } from "prop-types";
 
 import { Typography, Button } from "@material-ui/core";
 
+import { boxView } from "./constants";
+
+import Selector from "./selectors/RouteBox";
+import * as actions from "./redux/actions";
+
 import "./RouteBox.css";
 
-function RouteBoxNoCard() {
+const proopTypes = {
+  changeRouteBoxView: func.isRequired,
+};
+
+function RouteBoxNoCard({ changeRouteBoxView }) {
   const newOrder = () => {
-    console.log("new order");
+    changeRouteBoxView(boxView.ROUTE_SELECT);
   };
   return (
     <>
@@ -28,4 +39,6 @@ function RouteBoxNoCard() {
     </>
   );
 }
-export default RouteBoxNoCard;
+
+RouteBoxNoCard.proopTypes = proopTypes;
+export default connect(Selector, actions)(RouteBoxNoCard);
