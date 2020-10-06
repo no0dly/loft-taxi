@@ -1,4 +1,4 @@
-import reducer from "../reducers/taxiRoute";
+import reducer from "../taxiRoute";
 import {
   routeFieldChange,
   fetchAddressListRequest,
@@ -6,7 +6,7 @@ import {
   getRouteRequest,
   getRouteSuccess,
   changeRouteBoxView,
-} from "../actions";
+} from "../../actions";
 
 describe("taxiRoute reducer", () => {
   const initialData = {

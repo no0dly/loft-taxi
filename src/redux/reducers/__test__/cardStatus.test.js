@@ -1,4 +1,4 @@
-import reducer from "../reducers/cardStatus";
+import reducer from "../cardStatus";
 import {
   saveCardRequest,
   saveCardSuccess,
@@ -6,7 +6,7 @@ import {
   getCardRequest,
   getCardSuccess,
   getCardFailure,
-} from "../actions";
+} from "../../actions";
 
 describe("cardStatus reducer", () => {
   const initialData = {

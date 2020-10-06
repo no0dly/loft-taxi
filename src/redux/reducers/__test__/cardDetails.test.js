@@ -1,5 +1,5 @@
-import reducer from "../reducers/cardDetails";
-import { profileFieldChange } from "../actions";
+import reducer from "../cardDetails";
+import { profileFieldChange } from "../../actions";
 
 describe("cardStatus reducer", () => {
   const initialData = {

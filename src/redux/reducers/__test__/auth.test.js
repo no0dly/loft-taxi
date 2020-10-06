@@ -1,4 +1,4 @@
-import reducer from "../reducers/auth";
+import reducer from "../auth";
 import {
   loginRequest,
   loginSuccess,
@@ -8,7 +8,7 @@ import {
   registrationRequest,
   registrationSuccess,
   registrationFailure,
-} from "../actions";
+} from "../../actions";
 
 describe("Auth reducer", () => {
   const initialData = {

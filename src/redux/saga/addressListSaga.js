@@ -7,9 +7,9 @@ import {
 
 import { fetchAddressList } from "../../api";
 
-export function* addressListSaga(action) {
+export function* addressListSaga() {
   try {
-    const { data } = yield call(fetchAddressList, action.payload);
+    const { data } = yield call(fetchAddressList);
     if (data && data.addresses) {
       yield put(fetchAddressListSuccess(data.addresses));
     } else {
