@@ -16,7 +16,7 @@ const proopTypes = {
   routeBoxView: string.isRequired,
 };
 
-function RouteBox({ routeBoxView }) {
+export function RouteBox({ routeBoxView }) {
   return (
     <div className="route-box" data-testid="route-box">
       <Paper className="route-box__container">

@@ -17,7 +17,7 @@ const proopTypes = {
   addressList: shape([]),
 };
 
-function RouteBoxSelect({
+export function RouteBoxSelect({
   from,
   to,
   routeFieldChange,
@@ -54,7 +54,7 @@ function RouteBoxSelect({
   }, [fetchAddressListRequest]);
 
   return (
-    <form className="form" onSubmit={placeOrder}>
+    <form className="form" onSubmit={placeOrder} data-testid="route-box-select">
       <div className="form__field">
         <Autocomplete
           {...getDefaultProps(to)}

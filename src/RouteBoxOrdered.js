@@ -15,12 +15,12 @@ const proopTypes = {
   changeRouteBoxView: func.isRequired,
 };
 
-function RouteBoxNoCard({ changeRouteBoxView }) {
+export function RouteBoxOrdered({ changeRouteBoxView }) {
   const newOrder = () => {
     changeRouteBoxView(boxView.ROUTE_SELECT);
   };
   return (
-    <>
+    <div data-testid="route-box-ordered">
       <div className="title">
         <div className="title__header">
           <Typography variant="h4">Заказ размещён</Typography>
@@ -36,9 +36,9 @@ function RouteBoxNoCard({ changeRouteBoxView }) {
           Сделать новый заказ
         </Button>
       </div>
-    </>
+    </div>
   );
 }
 
-RouteBoxNoCard.proopTypes = proopTypes;
-export default connect(Selector, actions)(RouteBoxNoCard);
+RouteBoxOrdered.proopTypes = proopTypes;
+export default connect(Selector, actions)(RouteBoxOrdered);

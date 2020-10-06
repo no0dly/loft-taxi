@@ -6,7 +6,7 @@ import { pageUrls } from "./constants";
 
 function RouteBoxNoCard() {
   return (
-    <>
+    <div data-testid="route-box-no-card">
       <div className="title">
         <div className="title__header">
           <Typography variant="h4">Заполните платежные данные</Typography>
@@ -28,7 +28,7 @@ function RouteBoxNoCard() {
           Перейти в профиль
         </Button>
       </div>
-    </>
+    </div>
   );
 }
 export default RouteBoxNoCard;
