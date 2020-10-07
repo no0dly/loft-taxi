@@ -14,6 +14,7 @@ const proopTypes = {
   routeFieldChange: func.isRequired,
   fetchAddressListRequest: func.isRequired,
   getRouteRequest: func.isRequired,
+  routeFieldReset: func.isRequired,
   addressList: shape([]),
 };
 
@@ -24,6 +25,7 @@ export function RouteBoxSelect({
   fetchAddressListRequest,
   getRouteRequest,
   addressList,
+  routeFieldReset,
 }) {
   const getDefaultProps = (valueToFilter) => ({
     options: addressList.filter((item) => item !== valueToFilter),
@@ -52,6 +54,12 @@ export function RouteBoxSelect({
   useEffect(() => {
     fetchAddressListRequest();
   }, [fetchAddressListRequest]);
+
+  useEffect(() => {
+    return () => {
+      routeFieldReset();
+    };
+  }, [routeFieldReset]);
 
   return (
     <form className="form" onSubmit={placeOrder} data-testid="route-box-select">

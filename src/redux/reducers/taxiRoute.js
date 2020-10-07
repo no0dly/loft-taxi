@@ -6,6 +6,7 @@ import {
   getRouteRequest,
   getRouteSuccess,
   changeRouteBoxView,
+  routeFieldReset,
 } from "../actions";
 
 import { boxView } from "../../constants";
@@ -13,11 +14,13 @@ import { boxView } from "../../constants";
 const from = createReducer("", {
   [routeFieldChange]: (state, actions) =>
     actions.payload.name === "from" ? actions.payload.value : state,
+  [routeFieldReset]: (state) => "",
 });
 
 const to = createReducer("", {
   [routeFieldChange]: (state, actions) =>
     actions.payload.name === "to" ? actions.payload.value : state,
+  [routeFieldReset]: (state) => "",
 });
 
 const addressList = createReducer([], {

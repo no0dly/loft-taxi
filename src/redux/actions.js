@@ -18,6 +18,7 @@ export const registrationFailure = createAction("REGISTRATION_FAILURE");
 export const profileFieldChange = createAction("PROFILE_FIELD_CHANGE");
 
 export const routeFieldChange = createAction("ROUTE_FIELD_CHANGE");
+export const routeFieldReset = createAction("ROUTE_FIELD_RESET");
 
 export const fetchAddressListRequest = createAction(
   "FETCH_ADDRESS_LIST_REQUEST"

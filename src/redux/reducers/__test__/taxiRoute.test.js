@@ -6,6 +6,7 @@ import {
   getRouteRequest,
   getRouteSuccess,
   changeRouteBoxView,
+  routeFieldReset,
 } from "../../actions";
 
 describe("taxiRoute reducer", () => {
@@ -27,6 +28,13 @@ describe("taxiRoute reducer", () => {
       expect(res.from).toBe(value);
       expect(res.to).toBe(initialData.to);
     });
+    it("Should set this field to '' value if routeFieldReset action was run", () => {
+      const res = reducer(initialData, {
+        type: routeFieldReset.toString(),
+      });
+
+      expect(res.from).toBe("");
+    });
   });
   describe("to", () => {
     const value = "123";
@@ -38,6 +46,13 @@ describe("taxiRoute reducer", () => {
 
       expect(res.to).toBe(value);
       expect(res.from).toBe(initialData.from);
+    });
+    it("Should set this field to '' value if routeFieldReset action was run", () => {
+      const res = reducer(initialData, {
+        type: routeFieldReset.toString(),
+      });
+
+      expect(res.to).toBe("");
     });
   });
   describe("addressList", () => {

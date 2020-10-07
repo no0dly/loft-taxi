@@ -13,6 +13,7 @@ describe("RouteBoxSelect component", () => {
           routeFieldChange={jest.fn()}
           fetchAddressListRequest={jest.fn()}
           getRouteRequest={jest.fn()}
+          routeFieldReset={jest.fn()}
           addressList={[]}
         />
       </BrowserRouter>
