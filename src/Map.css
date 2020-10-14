@@ -1,6 +1,11 @@
-.map {
+.map-page {
   position: relative;
   height: calc(100% - 65px);
+}
+
+.map {
+  position: relative;
+  height: 100%;
   width: 100%;
   overflow: hidden;
 }

@@ -1,7 +1,14 @@
-import reducer from "../reducers/saveCard";
-import { saveCardRequest, saveCardSuccess, saveCardFailure } from "../actions";
+import reducer from "../cardStatus";
+import {
+  saveCardRequest,
+  saveCardSuccess,
+  saveCardFailure,
+  getCardRequest,
+  getCardSuccess,
+  getCardFailure,
+} from "../../actions";
 
-describe("saveCard reducer", () => {
+describe("cardStatus reducer", () => {
   const initialData = {
     isLoading: false,
     isLoaded: false,
@@ -32,6 +39,30 @@ describe("saveCard reducer", () => {
 
       expect(res.isLoading).toBe(false);
     });
+    it("Should set isLoading to true if getCardRequest action was run", () => {
+      const res = reducer(initialData, { type: getCardRequest.toString() });
+
+      expect(res.isLoading).toBe(true);
+    });
+    it("Should set isLoading to false if getCardSuccess action was run", () => {
+      const res = reducer(
+        { ...initialData, isLoading: true },
+        {
+          type: getCardSuccess.toString(),
+          payload: "test",
+        }
+      );
+
+      expect(res.isLoading).toBe(false);
+    });
+    it("Should set isLoading to false if getCardFailure action was run", () => {
+      const res = reducer(
+        { ...initialData, isLoading: true },
+        { type: getCardFailure.toString() }
+      );
+
+      expect(res.isLoading).toBe(false);
+    });
   });
 
   describe("isLoaded", () => {
@@ -56,6 +87,27 @@ describe("saveCard reducer", () => {
 
       expect(res.isLoaded).toBe(true);
     });
+    it("Should set isLoaded to false if getCardRequest action was run", () => {
+      const res = reducer(
+        { ...initialData, isLoaded: true },
+        { type: getCardRequest.toString() }
+      );
+
+      expect(res.isLoaded).toBe(false);
+    });
+    it("Should set isLoaded to true if getCardSuccess action was run", () => {
+      const res = reducer(initialData, {
+        type: getCardSuccess.toString(),
+        payload: "test",
+      });
+
+      expect(res.isLoaded).toBe(true);
+    });
+    it("Should set isLoaded to true if getCardFailure action was run", () => {
+      const res = reducer(initialData, { type: getCardFailure.toString() });
+
+      expect(res.isLoaded).toBe(true);
+    });
   });
 
   describe("error", () => {
@@ -77,6 +129,27 @@ describe("saveCard reducer", () => {
     });
     it("Should set error to true if saveCardFailure action was run", () => {
       const res = reducer(initialData, { type: saveCardFailure.toString() });
+
+      expect(res.error).toBe(true);
+    });
+    it("Should set error to false if getCardRequest action was run", () => {
+      const res = reducer(
+        { ...initialData, error: true },
+        { type: getCardRequest.toString() }
+      );
+
+      expect(res.error).toBe(false);
+    });
+    it("Should set error to false if getCardSuccess action was run", () => {
+      const res = reducer(initialData, {
+        type: getCardSuccess.toString(),
+        payload: "test",
+      });
+
+      expect(res.error).toBe(false);
+    });
+    it("Should set error to true if getCardFailure action was run", () => {
+      const res = reducer(initialData, { type: getCardFailure.toString() });
 
       expect(res.error).toBe(true);
     });

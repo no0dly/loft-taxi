@@ -11,15 +11,13 @@ import store from "./redux/store";
 import "reset.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <MuiThemeProvider theme={theme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </MuiThemeProvider>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <MuiThemeProvider theme={theme}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </MuiThemeProvider>
+  </Provider>,
   document.getElementById("root")
 );
 
