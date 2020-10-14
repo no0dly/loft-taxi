@@ -5,8 +5,8 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import "./RouteBox.css";
 import { string, func, shape } from "prop-types";
-import * as actions from "./redux/actions";
-import Selector from "./selectors/RouteBox";
+import * as actions from "../../../redux/actions";
+import Selector from "../../../selectors/RouteBox";
 
 const proopTypes = {
   from: string.isRequired,

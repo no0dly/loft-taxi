@@ -2,14 +2,14 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import mapboxgl from "mapbox-gl";
 import "./Map.css";
-import RouteBox from "./RouteBox";
+import RouteBox from "../../components/Map/RouteBox";
 import { func, shape, string } from "prop-types";
-import { drawRoute } from "./drawRoute";
+import { drawRoute } from "../../utils/drawRoute";
 
-import { boxView } from "./constants";
+import { boxView } from "../../utils/constants";
 
-import Selector from "./selectors/RouteBox";
-import * as actions from "./redux/actions";
+import Selector from "../../selectors/RouteBox";
+import * as actions from "../../redux/actions";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoibm9vZGx5IiwiYSI6ImNrZjZmMDFsODBod2IycW83cTZ3aTBmYmgifQ.fgAUFNAyohTZH-APFqS1xA";

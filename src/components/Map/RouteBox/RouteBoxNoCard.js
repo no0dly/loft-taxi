@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { Typography, Button } from "@material-ui/core";
-import { pageUrls } from "./constants";
+import { pageUrls } from "../../../utils/constants";
 
 function RouteBoxNoCard() {
   return (

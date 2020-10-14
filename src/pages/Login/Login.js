@@ -14,10 +14,10 @@ import {
 
 import "./Login.css";
 
-import { pageUrls } from "./constants";
+import { pageUrls } from "../../utils/constants";
 
-import authSelector from "./selectors/auth";
-import * as actions from "./redux/actions";
+import authSelector from "../../selectors/auth";
+import * as actions from "../../redux/actions";
 
 const proopTypes = {
   loginRequest: func.isRequired,

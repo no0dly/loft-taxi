@@ -13,10 +13,10 @@ import {
 } from "@material-ui/core";
 import "./Registration.css";
 
-import { pageUrls } from "./constants";
+import { pageUrls } from "../../utils/constants";
 
-import * as actions from "./redux/actions";
-import authSelector from "./selectors/auth";
+import * as actions from "../../redux/actions";
+import authSelector from "../../selectors/auth";
 
 const proopTypes = {
   registrationRequest: func.isRequired,

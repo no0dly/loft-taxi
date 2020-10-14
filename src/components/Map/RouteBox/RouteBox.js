@@ -1,16 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { boxView } from "./constants";
-import { Paper } from "@material-ui/core";
 import RouteBoxNoCard from "./RouteBoxNoCard";
 import RouteBoxSelect from "./RouteBoxSelect";
 import RouteBoxOrdered from "./RouteBoxOrdered";
+
+import { boxView } from "../../../utils/constants";
+import { Paper } from "@material-ui/core";
 import "./RouteBox.css";
 import { string } from "prop-types";
 
-import Selector from "./selectors/RouteBox";
-import * as actions from "./redux/actions";
+import Selector from "../../../selectors/RouteBox";
+import * as actions from "../../../redux/actions";
 
 const proopTypes = {
   routeBoxView: string.isRequired,

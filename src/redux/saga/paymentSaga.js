@@ -11,7 +11,7 @@ import {
 
 import { saveCard, getCard } from "../../api";
 
-import { boxView } from "../../constants";
+import { boxView } from "../../utils/constants";
 
 export function* saveCardRequestSaga(action) {
   try {

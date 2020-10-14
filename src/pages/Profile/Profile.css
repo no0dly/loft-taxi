@@ -1,5 +1,5 @@
 .profile {
-  background-image: url("./login-background.jpg");
+  background-image: url("../../assets/login-background.jpg");
   background-size: cover;
   height: calc(100vh - 65px);
 }

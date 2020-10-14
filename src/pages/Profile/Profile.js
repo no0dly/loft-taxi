@@ -4,8 +4,8 @@ import { Paper, Typography, Grid, TextField, Button } from "@material-ui/core";
 import { MCIcon } from "loft-taxi-mui-theme";
 import { func, shape, string } from "prop-types";
 import "./Profile.css";
-import * as actions from "./redux/actions";
-import cardDetailsSelector from "./selectors/cardDetails";
+import * as actions from "../../redux/actions";
+import cardDetailsSelector from "../../selectors/cardDetails";
 import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 

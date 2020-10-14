@@ -6,8 +6,8 @@ import "./Header.css";
 import { func } from "prop-types";
 import { Container, Paper, Button } from "@material-ui/core";
 
-import { pageUrls } from "./constants";
-import * as actions from "./redux/actions";
+import { pageUrls } from "../../../utils/constants";
+import * as actions from "../../../redux/actions";
 
 const proopTypes = {
   logout: func.isRequired,
