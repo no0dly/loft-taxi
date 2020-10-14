@@ -1,5 +1,5 @@
 import React from "react";
-import { RouteBoxSelect } from "../RouteBoxSelect";
+import { RouteBoxSelect } from "../components/Map/RouteBox/RouteBoxSelect";
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Profile } from "../Profile";
+import { Profile } from "../pages/Profile/Profile";
 import { render } from "@testing-library/react";
 
 describe("Profile component", () => {

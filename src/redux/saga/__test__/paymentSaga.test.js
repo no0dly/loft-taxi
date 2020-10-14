@@ -8,7 +8,7 @@ import {
   getCardSuccess,
 } from "../../actions";
 
-import { boxView } from "../../../constants";
+import { boxView } from "../../../utils/constants";
 
 jest.mock("../../../api", () => ({
   saveCard: jest.fn(() => ({

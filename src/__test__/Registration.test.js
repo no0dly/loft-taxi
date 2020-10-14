@@ -1,5 +1,5 @@
 import React from "react";
-import { Registration } from "../Registration";
+import { Registration } from "../pages/Registration/Registration";
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 

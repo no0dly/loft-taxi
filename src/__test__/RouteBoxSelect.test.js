@@ -1,8 +1,8 @@
 import React from "react";
-import { RouteBox } from "../RouteBox";
+import { RouteBox } from "../components/Map/RouteBox/RouteBox";
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { boxView } from "../constants";
+import { boxView } from "../utils/constants";
 
 describe("RouteBox component", () => {
   it("Should be rendered", () => {
