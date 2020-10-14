@@ -1,16 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { func, bool } from "prop-types";
 import { Logo } from "loft-taxi-mui-theme";
-import {
-  Typography,
-  Link,
-  TextField,
-  Paper,
-  Grid,
-  Button,
-} from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import "./Registration.css";
 
 import { pageUrls } from "../../utils/constants";
@@ -18,33 +11,16 @@ import { pageUrls } from "../../utils/constants";
 import * as actions from "../../redux/actions";
 import authSelector from "../../selectors/auth";
 
+import RegistrationForm from "../../components/Registration/Form";
+
 const proopTypes = {
-  registrationRequest: func.isRequired,
   resetLoginStatus: func.isRequired,
   isLoaded: bool.isRequired,
   error: bool.isRequired,
 };
 
-export function Registration({
-  registrationRequest,
-  resetLoginStatus,
-  isLoaded,
-  error,
-}) {
-  const [formFields, setFormField] = useState({
-    email: "",
-    name: "",
-    surname: "",
-    password: "",
-  });
+export function Registration({ resetLoginStatus, isLoaded, error }) {
   const history = useHistory();
-
-  const onChange = (e) => {
-    setFormField({
-      ...formFields,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   useEffect(() => {
     if (isLoaded && !error) {
@@ -57,11 +33,6 @@ export function Registration({
     };
   }, [isLoaded, error]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    registrationRequest(formFields);
-  };
-
   return (
     <div className="registration" data-testid="registration">
       <div className="registration__container">
@@ -69,84 +40,7 @@ export function Registration({
           <Logo white animated />
         </div>
         <Paper className="registration__form">
-          <form className="form" onSubmit={onSubmit}>
-            <div className="title">
-              <div className="title__header">
-                <Typography variant="h4">Регистрация</Typography>
-              </div>
-              <div className="title__subtext">
-                <Typography variant="body1">
-                  Уже зарегистрирован?{" "}
-                  <Link to={pageUrls.LOGIN} component={NavLink}>
-                    Войти
-                  </Link>
-                </Typography>
-              </div>
-            </div>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <div className="form__field">
-                  <TextField
-                    id="email"
-                    label="Адрес электронной почты"
-                    type="email"
-                    fullWidth
-                    name="email"
-                    value={formFields.email}
-                    required
-                    onChange={onChange}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={6} className="form__field">
-                <div className="form__field">
-                  <TextField
-                    id="name"
-                    label="Имя"
-                    fullWidth
-                    name="name"
-                    value={formFields.name}
-                    required
-                    onChange={onChange}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={6} className="form__field">
-                <div className="form__field">
-                  <TextField
-                    id="surname"
-                    label="Фамилия"
-                    fullWidth
-                    name="surname"
-                    value={formFields.surname}
-                    required
-                    onChange={onChange}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={12} className="form__field">
-                <div className="form__field">
-                  <TextField
-                    id="password"
-                    type="password"
-                    label="Пароль"
-                    fullWidth
-                    name="password"
-                    value={formFields.password}
-                    required
-                    onChange={onChange}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={12} className="form__field form__action">
-                <div className="form__field">
-                  <Button type="submit" variant="contained" color="primary">
-                    Зарегистрироваться
-                  </Button>
-                </div>
-              </Grid>
-            </Grid>
-          </form>
+          <RegistrationForm />
         </Paper>
       </div>
     </div>
