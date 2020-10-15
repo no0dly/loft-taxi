@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
 import { Paper, Typography, Grid, TextField, Button } from "@material-ui/core";
 import { MCIcon } from "loft-taxi-mui-theme";
 import { func, shape, string } from "prop-types";
@@ -21,6 +22,8 @@ const proopTypes = {
 };
 
 export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
+  const { control, handleSubmit, errors } = useForm();
+
   const onChange = (e) => {
     profileFieldChange({
       name: e.target ? e.target.name : "expiryDate",
@@ -34,6 +37,7 @@ export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
     saveCardRequest();
   };
   const { cardNumber, expiryDate, cardName, cvc } = cardDetails;
+  console.log(errors);
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <div className="profile" data-testid="profile">
@@ -47,7 +51,7 @@ export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
                 <Typography variant="body1">Способ оплаты</Typography>
               </div>
             </div>
-            <form onSubmit={submit}>
+            <form onSubmit={handleSubmit(submit)}>
               <Grid container>
                 <Grid item xs={12}>
                   <Grid container spacing={4} justify="center">
@@ -57,29 +61,60 @@ export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
                           <MCIcon />
                         </div>
                         <div className="form__field">
-                          <TextField
+                          <Controller
                             id="cardNumber"
-                            label="Номер карты *"
-                            type="cardNumber"
-                            fullWidth
-                            placeholder="0000 0000 0000 0000"
                             name="cardNumber"
-                            value={cardNumber}
-                            onChange={onChange}
-                            required
+                            control={control}
+                            rules={{ required: true }}
+                            defaultValue={cardNumber}
+                            render={(props) => {
+                              return (
+                                <TextField
+                                  id="cardNumber"
+                                  label="Номер карты"
+                                  type="cardNumber"
+                                  fullWidth
+                                  placeholder="0000 0000 0000 0000"
+                                  name="cardNumber"
+                                  value={cardNumber}
+                                  onChange={(e) => {
+                                    props.onChange(e.target.value);
+                                    onChange(e);
+                                  }}
+                                  error={!!errors.cardNumber}
+                                  helperText={
+                                    errors.cardNumber && "Не должно быть пустым"
+                                  }
+                                />
+                              );
+                            }}
                           />
                         </div>
                         <div className="form__field">
-                          <DatePicker
-                            value={expiryDate}
-                            onChange={onChange}
-                            label=" "
-                            minDate={new Date()}
-                            placeholder="07/22"
-                            openTo="year"
-                            views={["year", "month"]}
-                            format="MM/yy"
-                            fullWidth
+                          <Controller
+                            name="expiryDate"
+                            control={control}
+                            rules={{ required: true }}
+                            render={(props) => (
+                              <DatePicker
+                                value={expiryDate}
+                                onChange={(data) => {
+                                  props.onChange(data);
+                                  onChange(data);
+                                }}
+                                label=" "
+                                minDate={new Date()}
+                                placeholder="07/22"
+                                openTo="year"
+                                views={["year", "month"]}
+                                format="MM/yy"
+                                fullWidth
+                                error={!!errors.expiryDate}
+                                helperText={
+                                  errors.expiryDate && "Не должно быть пустым"
+                                }
+                              />
+                            )}
                           />
                         </div>
                       </Paper>
@@ -87,28 +122,52 @@ export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
                     <Grid item xs={6}>
                       <Paper elevation={4} className="profile-form__block">
                         <div className="form__field">
-                          <TextField
-                            id="cardName"
-                            label="Имя владельца"
-                            type="cardName"
-                            fullWidth
+                          <Controller
                             name="cardName"
-                            placeholder="USER NAME"
-                            value={cardName}
-                            onChange={onChange}
-                            required
+                            control={control}
+                            rules={{ required: true }}
+                            render={(props) => (
+                              <TextField
+                                label="Имя владельца"
+                                type="cardName"
+                                fullWidth
+                                name="cardName"
+                                placeholder="USER NAME"
+                                value={cardName}
+                                onChange={(e) => {
+                                  props.onChange(e.target.value);
+                                  onChange(e);
+                                }}
+                                error={!!errors.cardName}
+                                helperText={
+                                  errors.cardName && "Не должно быть пустым"
+                                }
+                              />
+                            )}
                           />
                         </div>
                         <div className="form__field">
-                          <TextField
-                            id="cvc"
-                            label="CVC *"
-                            type="cvc"
-                            fullWidth
+                          <Controller
                             name="cvc"
-                            value={cvc}
-                            onChange={onChange}
-                            required
+                            control={control}
+                            rules={{ required: true }}
+                            render={(props) => (
+                              <TextField
+                                label="CVC *"
+                                type="cvc"
+                                fullWidth
+                                name="cvc"
+                                value={cvc}
+                                onChange={(e) => {
+                                  props.onChange(e.target.value);
+                                  onChange(e);
+                                }}
+                                error={!!errors.cvc}
+                                helperText={
+                                  errors.cardName && "Не должно быть пустым"
+                                }
+                              />
+                            )}
                           />
                         </div>
                       </Paper>

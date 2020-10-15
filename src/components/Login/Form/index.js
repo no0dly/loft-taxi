@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 
 export function LoginForm() {
   const dispatch = useDispatch();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     dispatch(actions.loginRequest(data));
   };
@@ -37,10 +37,12 @@ export function LoginForm() {
               type="email"
               fullWidth
               name="email"
-              required
               as={TextField}
               control={control}
               defaultValue=""
+              rules={{ required: true }}
+              error={!!errors.email}
+              helperText={errors.email && "Не должно быть пустым"}
             />
           </div>
         </Grid>
@@ -51,10 +53,12 @@ export function LoginForm() {
               label="Пароль"
               fullWidth
               name="password"
-              required
               as={TextField}
               control={control}
               defaultValue=""
+              rules={{ required: true }}
+              error={!!errors.email}
+              helperText={errors.email && "Не должно быть пустым"}
             />
           </div>
         </Grid>

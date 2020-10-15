@@ -10,10 +10,11 @@ import { useDispatch } from "react-redux";
 
 export function RegistrationForm() {
   const dispatch = useDispatch();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     dispatch(actions.registrationRequest(data));
   };
+
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <div className="title">
@@ -37,10 +38,12 @@ export function RegistrationForm() {
               type="email"
               fullWidth
               name="email"
-              required
               as={TextField}
               control={control}
               defaultValue=""
+              rules={{ required: true }}
+              error={!!errors.email}
+              helperText={errors.email && "Не должно быть пустым"}
             />
           </div>
         </Grid>
@@ -50,10 +53,12 @@ export function RegistrationForm() {
               label="Имя"
               fullWidth
               name="name"
-              required
               as={TextField}
               control={control}
               defaultValue=""
+              rules={{ required: true }}
+              error={!!errors.name}
+              helperText={errors.name && "Не должно быть пустым"}
             />
           </div>
         </Grid>
@@ -63,10 +68,12 @@ export function RegistrationForm() {
               label="Фамилия"
               fullWidth
               name="surname"
-              required
               as={TextField}
               control={control}
               defaultValue=""
+              rules={{ required: true }}
+              error={!!errors.surname}
+              helperText={errors.surname && "Не должно быть пустым"}
             />
           </div>
         </Grid>
@@ -77,10 +84,12 @@ export function RegistrationForm() {
               label="Пароль"
               fullWidth
               name="password"
-              required
               as={TextField}
               control={control}
               defaultValue=""
+              rules={{ required: true }}
+              error={!!errors.password}
+              helperText={errors.password && "Не должно быть пустым"}
             />
           </div>
         </Grid>
