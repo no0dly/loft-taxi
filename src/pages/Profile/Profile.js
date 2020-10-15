@@ -37,7 +37,7 @@ export function Profile({ saveCardRequest, profileFieldChange, cardDetails }) {
     saveCardRequest();
   };
   const { cardNumber, expiryDate, cardName, cvc } = cardDetails;
-  console.log(errors);
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <div className="profile" data-testid="profile">
