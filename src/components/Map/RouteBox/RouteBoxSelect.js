@@ -60,7 +60,7 @@ export function RouteBoxSelect({
       routeFieldReset();
     };
   }, [routeFieldReset]);
-  console.log(errors);
+
   return (
     <form
       className="form"

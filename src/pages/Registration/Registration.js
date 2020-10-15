@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { func, bool } from "prop-types";
 import { Logo } from "loft-taxi-mui-theme";
 import { Paper } from "@material-ui/core";
-import "./Registration.css";
+import img from "../../assets/login-background.jpg";
 
 import { pageUrls } from "../../utils/constants";
 
@@ -34,18 +35,43 @@ export function Registration({ resetLoginStatus, isLoaded, error }) {
   }, [isLoaded, error]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="registration" data-testid="registration">
-      <div className="registration__container">
-        <div className="registration__logo">
+    <RegistrationPage data-testid="registration">
+      <Container>
+        <LogoContainer>
           <Logo white animated />
-        </div>
-        <Paper className="registration__form">
+        </LogoContainer>
+        <Form>
           <RegistrationForm />
-        </Paper>
-      </div>
-    </div>
+        </Form>
+      </Container>
+    </RegistrationPage>
   );
 }
+
+const RegistrationPage = styled.div`
+  background-image: url(${img});
+  background-size: cover;
+  height: 100vh;
+`;
+
+const Container = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const LogoContainer = styled.div`
+  width: 300px;
+`;
+
+const Form = styled(Paper)`
+  width: 500px;
+  padding: 44px 60px;
+  margin: 48px 0;
+  background: #fff;
+  box-sizing: border-box;
+`;
 
 Registration.proopTypes = proopTypes;
 export default connect(authSelector, actions)(Registration);

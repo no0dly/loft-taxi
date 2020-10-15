@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import mapboxgl from "mapbox-gl";
-import "./Map.css";
 import RouteBox from "../../components/Map/RouteBox";
 import { func, shape, string } from "prop-types";
 import { drawRoute } from "../../utils/drawRoute";
@@ -10,6 +9,8 @@ import { boxView } from "../../utils/constants";
 
 import Selector from "../../selectors/RouteBox";
 import * as actions from "../../redux/actions";
+
+import styled from "styled-components";
 
 mapboxgl.accessToken =
   "pk.eyJ1Ijoibm9vZGx5IiwiYSI6ImNrZjZmMDFsODBod2IycW83cTZ3aTBmYmgifQ.fgAUFNAyohTZH-APFqS1xA";
@@ -51,14 +52,34 @@ export function Map({ taxiRoute, routeBoxView, changeRouteBoxView }) {
   }, [routeBoxView]);
 
   return (
-    <div className="map-page">
-      <div className="map" data-testid="map">
-        <div className="map-container" ref={mapContainer} />
-      </div>
+    <Page>
+      <MapBox data-testid="map">
+        <MapContainer ref={mapContainer} />
+      </MapBox>
       <RouteBox />
-    </div>
+    </Page>
   );
 }
+
+const Page = styled.div`
+  position: relative;
+  height: calc(100% - 65px);
+`;
+
+const MapBox = styled.div`
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+`;
+
+const MapContainer = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+`;
 
 Map.proopTypes = proopTypes;
 export default connect(Selector, actions)(Map);

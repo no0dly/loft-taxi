@@ -7,6 +7,7 @@ import { pageUrls } from "../../../utils/constants";
 import { useForm, Controller } from "react-hook-form";
 import * as actions from "../../../redux/actions";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 
 export function LoginForm() {
   const dispatch = useDispatch();
@@ -16,22 +17,22 @@ export function LoginForm() {
   };
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="title">
-        <div className="title__header">
+      <Title>
+        <TitleHeader>
           <Typography variant="h4">Войти</Typography>
-        </div>
-        <div className="title__subtext">
+        </TitleHeader>
+        <TitleSub>
           <Typography variant="body1">
             Новый пользователь?{" "}
             <Link to={pageUrls.REGISTRATION} component={NavLink}>
               Зарегистрируйтесь
             </Link>
           </Typography>
-        </div>
-      </div>
+        </TitleSub>
+      </Title>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <div className="form__field">
+          <FormField>
             <Controller
               label="Имя пользователя"
               type="email"
@@ -44,10 +45,10 @@ export function LoginForm() {
               error={!!errors.email}
               helperText={errors.email && "Не должно быть пустым"}
             />
-          </div>
+          </FormField>
         </Grid>
         <Grid item xs={12}>
-          <div className="form__field">
+          <FormField>
             <Controller
               type="password"
               label="Пароль"
@@ -60,18 +61,34 @@ export function LoginForm() {
               error={!!errors.email}
               helperText={errors.email && "Не должно быть пустым"}
             />
-          </div>
+          </FormField>
         </Grid>
         <Grid item xs={12}>
-          <div className="form__field">
+          <FormField>
             <Button type="submit" variant="contained" color="primary">
               Войти
             </Button>
-          </div>
+          </FormField>
         </Grid>
       </Grid>
     </form>
   );
 }
+
+const Title = styled.div`
+  margin-bottom: 20px;
+`;
+
+const TitleHeader = styled.div`
+  margin-bottom: 40px;
+`;
+
+const TitleSub = styled.div`
+  margin-bottom: 10px;
+`;
+
+const FormField = styled.div`
+  padding-bottom: 30px;
+`;
 
 export default LoginForm;

@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { func, bool } from "prop-types";
+import styled from "styled-components";
 import { Logo } from "loft-taxi-mui-theme";
 import { useHistory } from "react-router-dom";
 import LoginForm from "../../components/Login/Form";
 import { Paper } from "@material-ui/core";
-
-import "./Login.css";
+import img from "../../assets/login-background.jpg";
 
 import { pageUrls } from "../../utils/constants";
 
@@ -34,18 +34,43 @@ export function Login({ resetLoginStatus, isLoaded, error }) {
   }, [isLoaded, error]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="login" data-testid="login">
-      <div className="login__container">
-        <div className="login__logo">
+    <LoginPage data-testid="login">
+      <Container>
+        <LogoContainer>
           <Logo white animated />
-        </div>
-        <Paper className="login__form">
+        </LogoContainer>
+        <Form>
           <LoginForm />
-        </Paper>
-      </div>
-    </div>
+        </Form>
+      </Container>
+    </LoginPage>
   );
 }
+
+const LoginPage = styled.div`
+  background-image: url(${img});
+  background-size: cover;
+  height: 100vh;
+`;
+
+const Container = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const LogoContainer = styled.div`
+  width: 300px;
+`;
+
+const Form = styled(Paper)`
+  width: 500px;
+  padding: 44px 60px;
+  margin: 48px 0;
+  background: #fff;
+  box-sizing: border-box;
+`;
 
 Login.proopTypes = proopTypes;
 

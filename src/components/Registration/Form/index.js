@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import styled from "styled-components";
 import { Typography, Link, TextField, Grid, Button } from "@material-ui/core";
 
 import { pageUrls } from "../../../utils/constants";
@@ -17,22 +18,22 @@ export function RegistrationForm() {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="title">
-        <div className="title__header">
+      <Title>
+        <TitleHeader>
           <Typography variant="h4">Регистрация</Typography>
-        </div>
-        <div className="title__subtext">
+        </TitleHeader>
+        <TitleSub>
           <Typography variant="body1">
             Уже зарегистрирован?{" "}
             <Link to={pageUrls.LOGIN} component={NavLink}>
               Войти
             </Link>
           </Typography>
-        </div>
-      </div>
+        </TitleSub>
+      </Title>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <div className="form__field">
+          <FormField>
             <Controller
               label="Адрес электронной почты"
               type="email"
@@ -45,10 +46,10 @@ export function RegistrationForm() {
               error={!!errors.email}
               helperText={errors.email && "Не должно быть пустым"}
             />
-          </div>
+          </FormField>
         </Grid>
-        <Grid item xs={6} className="form__field">
-          <div className="form__field">
+        <Grid item xs={6}>
+          <FormField>
             <Controller
               label="Имя"
               fullWidth
@@ -60,10 +61,10 @@ export function RegistrationForm() {
               error={!!errors.name}
               helperText={errors.name && "Не должно быть пустым"}
             />
-          </div>
+          </FormField>
         </Grid>
-        <Grid item xs={6} className="form__field">
-          <div className="form__field">
+        <Grid item xs={6}>
+          <FormField>
             <Controller
               label="Фамилия"
               fullWidth
@@ -75,10 +76,10 @@ export function RegistrationForm() {
               error={!!errors.surname}
               helperText={errors.surname && "Не должно быть пустым"}
             />
-          </div>
+          </FormField>
         </Grid>
-        <Grid item xs={12} className="form__field">
-          <div className="form__field">
+        <Grid item xs={12}>
+          <FormField>
             <Controller
               type="password"
               label="Пароль"
@@ -91,18 +92,39 @@ export function RegistrationForm() {
               error={!!errors.password}
               helperText={errors.password && "Не должно быть пустым"}
             />
-          </div>
+          </FormField>
         </Grid>
-        <Grid item xs={12} className="form__field form__action">
-          <div className="form__field">
+        <Grid item xs={12}>
+          <FormActionField>
             <Button type="submit" variant="contained" color="primary">
               Зарегистрироваться
             </Button>
-          </div>
+          </FormActionField>
         </Grid>
       </Grid>
     </form>
   );
 }
+
+const Title = styled.div`
+  margin-bottom: 20px;
+`;
+
+const TitleHeader = styled.div`
+  margin-bottom: 40px;
+`;
+
+const TitleSub = styled.div`
+  margin-bottom: 10px;
+`;
+
+const FormField = styled.div`
+  padding-bottom: 30px;
+`;
+
+const FormActionField = styled.div`
+  padding-bottom: 30px;
+  text-align: right;
+`;
 
 export default RegistrationForm;
