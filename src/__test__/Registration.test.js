@@ -5,11 +5,10 @@ import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import store from "../redux/store";
 
-const mockStore = store;
 describe("Registration component", () => {
   it("Should be rendered", () => {
     const { getByTestId } = render(
-      <Provider store={mockStore}>
+      <Provider store={store}>
         <BrowserRouter>
           <Registration
             registrationRequest={jest.fn()}

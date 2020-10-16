@@ -28,7 +28,7 @@ export function RouteBoxSelect({
   addressList,
   routeFieldReset,
 }) {
-  const { control, handleSubmit, errors } = useForm();
+  const { control, handleSubmit, errors, setValue } = useForm();
   const getDefaultProps = (valueToFilter) => ({
     options: addressList.filter((item) => item !== valueToFilter),
     getOptionLabel: (option) => option,
@@ -43,12 +43,14 @@ export function RouteBoxSelect({
       name: "from",
       value: newValue || "",
     });
+    setValue("from", newValue);
   };
   const setTo = (e, newValue) => {
     routeFieldChange({
       name: "to",
       value: newValue || "",
     });
+    setValue("to", newValue);
   };
 
   useEffect(() => {
@@ -75,10 +77,11 @@ export function RouteBoxSelect({
           render={(props) => (
             <Autocomplete
               {...getDefaultProps(to)}
-              onChange={(e, newValue) => {
-                props.onChange(e.target.value);
-                setFrom(e, newValue);
-              }}
+              // onChange={(e, newValue) => {
+              //   props.onChange(e.target.value);
+              //   setFrom(e, newValue);
+              // }}
+              onChange={setFrom}
               data-name="from"
               value={from}
               renderInput={(params) => (
@@ -102,10 +105,7 @@ export function RouteBoxSelect({
           render={(props) => (
             <Autocomplete
               {...getDefaultProps(from)}
-              onChange={(e, newValue) => {
-                props.onChange(e.target.value);
-                setTo(e, newValue);
-              }}
+              onChange={setTo}
               value={to}
               name="to"
               id="to"

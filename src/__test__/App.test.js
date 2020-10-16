@@ -7,11 +7,10 @@ import { BrowserRouter } from "react-router-dom";
 
 import store from "../redux/store";
 
-const mockStore = store;
 describe("App component", () => {
   it("Should be rendered", () => {
     const { getByTestId } = render(
-      <Provider store={mockStore}>
+      <Provider store={store}>
         <BrowserRouter>
           <App loginSuccess={jest.fn()} />
         </BrowserRouter>
