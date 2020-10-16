@@ -9,7 +9,7 @@ import {
   routeFieldReset,
 } from "../actions";
 
-import { boxView } from "../../constants";
+import { boxView } from "../../utils/constants";
 
 const from = createReducer("", {
   [routeFieldChange]: (state, actions) =>

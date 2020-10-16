@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
 import { TextField, Button } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import "./RouteBox.css";
 import { string, func, shape } from "prop-types";
-import * as actions from "./redux/actions";
-import Selector from "./selectors/RouteBox";
+import * as actions from "../../../redux/actions";
+import Selector from "../../../selectors/RouteBox";
 
 const proopTypes = {
   from: string.isRequired,
@@ -27,14 +28,13 @@ export function RouteBoxSelect({
   addressList,
   routeFieldReset,
 }) {
+  const { control, handleSubmit, errors, setValue } = useForm();
   const getDefaultProps = (valueToFilter) => ({
     options: addressList.filter((item) => item !== valueToFilter),
     getOptionLabel: (option) => option,
   });
 
   const placeOrder = (e) => {
-    e.preventDefault();
-
     getRouteRequest();
   };
 
@@ -43,12 +43,14 @@ export function RouteBoxSelect({
       name: "from",
       value: newValue || "",
     });
+    setValue("from", newValue);
   };
   const setTo = (e, newValue) => {
     routeFieldChange({
       name: "to",
       value: newValue || "",
     });
+    setValue("to", newValue);
   };
 
   useEffect(() => {
@@ -62,39 +64,60 @@ export function RouteBoxSelect({
   }, [routeFieldReset]);
 
   return (
-    <form className="form" onSubmit={placeOrder} data-testid="route-box-select">
+    <form
+      className="form"
+      onSubmit={handleSubmit(placeOrder)}
+      data-testid="route-box-select"
+    >
       <div className="form__field">
-        <Autocomplete
-          {...getDefaultProps(to)}
-          id="from"
-          onChange={setFrom}
-          data-name="from"
-          value={from}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Откуда"
-              margin="normal"
-              fullWidth
-              required
+        <Controller
+          name="from"
+          control={control}
+          rules={{ required: true }}
+          render={(props) => (
+            <Autocomplete
+              {...getDefaultProps(to)}
+              // onChange={(e, newValue) => {
+              //   props.onChange(e.target.value);
+              //   setFrom(e, newValue);
+              // }}
+              onChange={setFrom}
+              data-name="from"
+              value={from}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Откуда"
+                  margin="normal"
+                  fullWidth
+                  error={!!errors.from}
+                />
+              )}
             />
           )}
         />
       </div>
       <div className="form__field">
-        <Autocomplete
-          {...getDefaultProps(from)}
-          id="debug"
-          debug
-          onChange={setTo}
-          value={to}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Куда"
-              margin="normal"
-              fullWidth
-              required
+        <Controller
+          name="to"
+          control={control}
+          rules={{ required: true }}
+          render={(props) => (
+            <Autocomplete
+              {...getDefaultProps(from)}
+              onChange={setTo}
+              value={to}
+              name="to"
+              id="to"
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Куда"
+                  margin="normal"
+                  fullWidth
+                  error={!!errors.to}
+                />
+              )}
             />
           )}
         />

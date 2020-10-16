@@ -4,8 +4,8 @@ import Login from "./Login";
 import Map from "./Map";
 import Profile from "./Profile";
 import Registration from "./Registration";
-import { pageUrls } from "./constants";
-import PrivatRoute from "./PrivateRoute";
+import { pageUrls } from "../utils/constants";
+import PrivatRoute from "../components/Common/PrivateRoute/PrivateRoute";
 
 function View() {
   return (

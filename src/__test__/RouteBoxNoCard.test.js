@@ -1,5 +1,5 @@
 import React from "react";
-import RouteBoxNoCard from "../RouteBoxNoCard";
+import RouteBoxNoCard from "../components/Map/RouteBox/RouteBoxNoCard";
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 

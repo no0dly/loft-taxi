@@ -4,10 +4,10 @@ import { func } from "prop-types";
 
 import { Typography, Button } from "@material-ui/core";
 
-import { boxView } from "./constants";
+import { boxView } from "../../../utils/constants";
 
-import Selector from "./selectors/RouteBox";
-import * as actions from "./redux/actions";
+import Selector from "../../../selectors/RouteBox";
+import * as actions from "../../../redux/actions";
 
 import "./RouteBox.css";
 

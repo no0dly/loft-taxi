@@ -1,19 +1,23 @@
 import React from "react";
-import { Registration } from "../Registration";
+import { Provider } from "react-redux";
+import { Registration } from "../pages/Registration/Registration";
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
+import store from "../redux/store";
 
 describe("Registration component", () => {
   it("Should be rendered", () => {
     const { getByTestId } = render(
-      <BrowserRouter>
-        <Registration
-          registrationRequest={jest.fn()}
-          resetLoginStatus={jest.fn()}
-          isLoaded={false}
-          error={false}
-        />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Registration
+            registrationRequest={jest.fn()}
+            resetLoginStatus={jest.fn()}
+            isLoaded={false}
+            error={false}
+          />
+        </BrowserRouter>
+      </Provider>
     );
 
     expect(getByTestId("registration")).toBeInTheDocument();

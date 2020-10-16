@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { func } from "prop-types";
 import "./App.css";
-import Header from "./Header";
-import View from "./View";
+import Header from "./components/Common/Header";
+import View from "./pages";
 import { useLocation } from "react-router-dom";
-import { pageUrls } from "./constants";
+import { pageUrls } from "./utils/constants";
 
 import * as actions from "./redux/actions";
 
@@ -16,6 +16,7 @@ const proopTypes = {
 
 export function App({ loginSuccess, getCardRequest }) {
   const { pathname } = useLocation();
+  const [initialLoad, setInitialLoad] = useState(true);
 
   const isLoginPages =
     pathname === pageUrls.LOGIN || pathname === pageUrls.HOME;
@@ -26,12 +27,13 @@ export function App({ loginSuccess, getCardRequest }) {
       loginSuccess(token);
       getCardRequest(token);
     }
-  }, [loginSuccess, getCardRequest]);
+    setInitialLoad(false);
+  }, [loginSuccess, getCardRequest, setInitialLoad]);
 
   return (
     <div className="app" data-testid="app">
       {!isLoginPages && <Header />}
-      <View />
+      {!initialLoad && <View />}
     </div>
   );
 }
